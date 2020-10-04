@@ -1,3 +1,5 @@
+![Anxious Mango Mascot](./images/mascot-1.png)
+
 # Anxious Mango
 - App is here to help everyone with their anxiety in a complicated mango world.
 - Created by 
