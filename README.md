@@ -18,16 +18,17 @@
 - [x] Think about how thought logging is helpful and how it could be transformed into a digital app format.
 - [X] find sheet with activities and place inside this repo
 - [ ] Design thought logging
-        - [ ] Situation
-        - [ ] Moods
-        - [ ] Automatic Thoughts (images)
-        - [ ] Thinking errors
-        - [ ] Evidence that supports the hot thought
-        - [ ] Alleviate/Balanced Thoughts
-        - [ ] Rate Moods Now 
+    - Thought logging phases
+        - [ ] Dashboard where you can see thought logging
+        - Create a new thought log
+            - [ ] Situation
+            - [ ] Moods
+            - [ ] Automatic Thoughts (images)
+            - [ ] Thinking errors
+            - [ ] Evidence that supports the hot thought
+            - [ ] Alleviate/Balanced Thoughts
+            - [ ] Rate Moods Now 
     - [ ] Should be able to add multiple thoughts for each. Hold down thought to turn into hot thought that should turn red.
-
-
 
 # Frank To Do
 - [ ] Try to reach out to counsellors at UofT Health and Wellness or similar groups. It would be great to set up some virtual coffee chats.
