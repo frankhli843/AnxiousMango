@@ -1,16 +1,38 @@
-import {Button} from "react-native";
+import {Button, View} from "react-native";
 import * as React from "react";
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
 
-function CreateThoughtRecordButton() {
+function CreateThoughtRecordButton({navigation}: {navigation: any}) {
     return <>
         <Button
             title="Create New Thought Record"
-            onPress={() => {
-                alert("Create button pressed")
-            }
-            }
+            onPress={() => navigation.navigate("Create")}
             color="#D39999"/>
+            </>
+}
+
+function NewThoughtRecord() {
+    return <>
+        Hello, world!
     </>
 }
 
-export default CreateThoughtRecordButton;
+const stack = createStackNavigator()
+
+function NavStack(){
+    return <>
+        <stack.Navigator>
+            <stack.Screen
+                name="Home"
+                component={CreateThoughtRecordButton}
+            />
+            <stack.Screen
+                name="Create"
+                component={NewThoughtRecord}
+            />
+        </stack.Navigator>
+    </>
+}
+
+export default NavStack;
