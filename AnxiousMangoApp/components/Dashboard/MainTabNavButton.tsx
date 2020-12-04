@@ -38,18 +38,4 @@ const style = StyleSheet.create({
     }
 })
 
-function NavStack(){
-    return<stack.Navigator>
-            <stack.Screen
-                name="Home"
-                component={MainTabNavButton}
-            />
-            <stack.Screen
-                name="Create"
-                component={NewThoughtRecord}
-                options={{headerTitle: "Create New Thought Record"}}
-            />
-        </stack.Navigator>
-}
-
-export default NavStack;
+export default MainTabNavButton;
