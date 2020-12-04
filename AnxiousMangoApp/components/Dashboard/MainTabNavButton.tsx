@@ -8,7 +8,7 @@ type CreateThoughtRecordButtonProps = {
     title: string,
 }
 
-export function MainTabNavButton({setCurrentMode, title}: CreateThoughtRecordButtonProps) {
+function MainTabNavButton({setCurrentMode, title}: CreateThoughtRecordButtonProps) {
     return <View style={style.buttonStyle}>
             <Button
                 title={title}
@@ -25,9 +25,6 @@ function NewThoughtRecord() {
         </View>
     </>
 }
-
-const stack = createStackNavigator()
-
 // stick button to bottom of screen
 const style = StyleSheet.create({
     buttonStyle: {
