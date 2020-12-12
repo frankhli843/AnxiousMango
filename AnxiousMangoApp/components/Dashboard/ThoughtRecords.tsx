@@ -1,5 +1,6 @@
 import {ScrollView} from "react-native";
 import {Cell, Section, TableView} from "react-native-tableview-simple";
+import {DashboardData, dashboardDemoData} from "../../types/DashboardData";
 import * as React from "react";
 
 const tableViewStyles = {
@@ -12,7 +13,8 @@ function ThoughtRecords() {
         <ScrollView contentContainerStyle={tableViewStyles}>
             <TableView>
                 <Section header="Thought Records" headerTextColor="#000000">
-                    <Cell cellStyle="Subtitle" backgroundColor="#EBAF83" title="Thought record goes here." detail="Dec 31, 1969 11:59PM"/>
+                    <Cell cellStyle="Subtitle" backgroundColor="#EBAF83" title={dashboardDemoData.thoughtRecords[0].title} detail={dashboardDemoData.thoughtRecords[0].dateCreated}/>
+                    <Cell cellStyle="Subtitle" backgroundColor="#EBAF83" title={dashboardDemoData.thoughtRecords[1].title} detail={dashboardDemoData.thoughtRecords[1].dateCreated}/>
                 </Section>
             </TableView>
         </ScrollView>
