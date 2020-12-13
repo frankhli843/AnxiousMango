@@ -1,6 +1,6 @@
-import {ScrollView} from "react-native";
+import {Button, ScrollView} from "react-native";
 import {Cell, Section, TableView} from "react-native-tableview-simple";
-import {DashboardData, dashboardDemoData} from "../../types/DashboardData";
+import {DashboardData, dashboardDemoData, ThoughtRecord} from "../../types/DashboardData";
 import * as React from "react";
 
 const tableViewStyles = {
@@ -8,13 +8,31 @@ const tableViewStyles = {
     marginBottom: 20
 };
 
-function ThoughtRecords() {
+type thoughtRecordProps = {
+    thoughtRecords: ThoughtRecord[],
+    goToThoughtRecord: (id: number) => void,
+}
+
+function ThoughtRecords({thoughtRecords, goToThoughtRecord}: thoughtRecordProps) {
     return <>
         <ScrollView contentContainerStyle={tableViewStyles}>
             <TableView>
                 <Section header="Thought Records" headerTextColor="#000000">
-                    <Cell cellStyle="Subtitle" backgroundColor="#EBAF83" title={dashboardDemoData.thoughtRecords[0].title} detail={dashboardDemoData.thoughtRecords[0].dateCreated}/>
-                    <Cell cellStyle="Subtitle" backgroundColor="#EBAF83" title={dashboardDemoData.thoughtRecords[1].title} detail={dashboardDemoData.thoughtRecords[1].dateCreated}/>
+                    {
+                        thoughtRecords.map(
+                            function(thoughtRecord, i){  // component
+                                return(
+                                    <Button title="" onPress={() => {goToThoughtRecord(i)}}>
+                                        <Cell
+                                            cellStyle="Subtitle"
+                                            backgroundColor="#EBAF83"
+                                            title={thoughtRecord.title}
+                                            detail={thoughtRecord.dateCreated}/>
+                                    </Button>
+                                )
+                            }
+                        )
+                    }
                 </Section>
             </TableView>
         </ScrollView>

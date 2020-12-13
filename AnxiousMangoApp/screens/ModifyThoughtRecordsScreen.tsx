@@ -5,26 +5,25 @@ import {ThoughtRecord} from "../types/DashboardData";
 
 
 type modifyThoughtRecordScreenProps = {
-    thoughtRecords: ThoughtRecord[]
+    thoughtRecords: ThoughtRecord[],
+    currentThoughtRecordID: number
 }
 
-function ModifyThoughtRecordsScreen({thoughtRecords}: modifyThoughtRecordScreenProps){
+function ModifyThoughtRecordsScreen({thoughtRecords, currentThoughtRecordID}: modifyThoughtRecordScreenProps){
+    const canEdit: boolean = false;
+    const thoughtRecord = thoughtRecords[currentThoughtRecordID];
     return (
         <>
             <Text>Thought Record</Text>
-            {
-                thoughtRecords.map(thoughtRecord => {  // thought record dashboard
-                    return (
-                        <Card>
-                            <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
-                            <Text>{`Title:${thoughtRecord.title}` }</Text>
-                            { thoughtRecord.automaticThoughts.map(thought => {  // thoughts view component
-                                return<Card><Text>{JSON.stringify(thought)}</Text></Card>
-                            })}
-                        </Card>
-                    )
-                })
-            }
+            <Card>
+                <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
+                <Text>{`Title:${thoughtRecord.title}` }</Text>
+                { thoughtRecord.automaticThoughts.map(thought => {  // thoughts view component
+                    return<Card><Text>{JSON.stringify(thought)}</Text></Card>
+                })}
+            </Card>
+
+
         </>
     )
 
