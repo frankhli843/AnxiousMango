@@ -22,13 +22,12 @@ function ThoughtRecords({thoughtRecords, goToThoughtRecord}: thoughtRecordProps)
                         thoughtRecords.map(
                             function(thoughtRecord, i){  // component
                                 return(
-                                    <Button title="" onPress={() => {goToThoughtRecord(i)}}>
-                                        <Cell
-                                            cellStyle="Subtitle"
-                                            backgroundColor="#EBAF83"
-                                            title={thoughtRecord.title}
-                                            detail={thoughtRecord.dateCreated}/>
-                                    </Button>
+                                    <Cell
+                                        onPress={() => {goToThoughtRecord(i)}}
+                                        cellStyle="Subtitle"
+                                        backgroundColor="#EBAF83"
+                                        title={thoughtRecord.title}
+                                        detail={thoughtRecord.dateCreated}/>
                                 )
                             }
                         )
