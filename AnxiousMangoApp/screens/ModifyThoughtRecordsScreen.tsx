@@ -18,11 +18,19 @@ function ModifyThoughtRecordsScreen({thoughtRecords, currentThoughtRecordID}: mo
             <Text>Thought Record</Text>
             <Card>
                 <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
-                <Text>Title: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.title}/></Text>
+                <Text>Title: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.situation.toString()}/></Text>
                 { thoughtRecord.automaticThoughts.map(thought => {  // thoughts view component
                     return<Card><Text>Description: <TextInput style={style.textInputStyle} placeholder={thought.description}/></Text>
-                        <Text>Evidence for Hot Thought: <TextInput style={style.textInputStyle} placeholder={thought.hotThought.for}/></Text>
-                        <Text>Evidence against Hot Thought: <TextInput style={style.textInputStyle} placeholder={thought.hotThought.against}/></Text></Card>
+                        <Text>Evidence for Hot Thought:
+                            <TextInput
+                                style={style.textInputStyle}
+                                placeholder={thought.hotThought && thought.hotThought.for.toString()}/>
+                        </Text>
+                        <Text>Evidence against Hot Thought:
+                            <TextInput
+                                style={style.textInputStyle}
+                                       placeholder={thought.hotThought && thought.hotThought.against.toString()}/></Text>
+                    </Card>
                 })}
             </Card>
 

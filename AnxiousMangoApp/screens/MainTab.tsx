@@ -42,6 +42,7 @@ export default function MainTab(this: any) {
     setCurrentMode(MainTabModes.ModifyThoughtRecord);
     setCurrentThoughtRecordID(currentThoughtRecordID);
   }
+
   return (
     <View>
       {
