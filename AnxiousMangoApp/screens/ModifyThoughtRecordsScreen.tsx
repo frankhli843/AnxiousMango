@@ -3,6 +3,7 @@ import {Card} from "react-native-elements";
 import * as React from "react";
 import {ThoughtRecord} from "../types/DashboardData";
 import {TextInput, StyleSheet} from "react-native";
+import ThoughtRecordInfo from "./ThoughtRecordInfo";
 
 
 type modifyThoughtRecordScreenProps = {
@@ -15,10 +16,8 @@ function ModifyThoughtRecordsScreen({thoughtRecords, currentThoughtRecordID}: mo
     const thoughtRecord = thoughtRecords[currentThoughtRecordID];
     return (
         <>
-            <Text>Thought Record</Text>
             <Card>
-                <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
-                <Text>Title: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.situation.toString()}/></Text>
+                <ThoughtRecordInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
                 { thoughtRecord.automaticThoughts.map(thought => {  // thoughts view component
                     return<Card><Text>Description: <TextInput style={style.textInputStyle} placeholder={thought.description}/></Text>
                         <Text>Evidence for Hot Thought:
