@@ -5,6 +5,7 @@ export type DashboardData = {
 export type ThoughtRecord = {
     dateCreated: string, // valid date string
     dateModified: string,
+    title: string,
     situation: string[],
     moods: Mood[],
     automaticThoughts: AutomaticThought[]
@@ -32,6 +33,7 @@ export const dashboardDemoData: DashboardData = {
             // b/c it puts them into debt
             dateCreated: '12/20/2020',
             dateModified: '12/20/2020',
+            title: "covid restrictions",
             situation: ['Saw on Youtube Ontario government announces new covid restrictions', "sitting in room in bed alone"],
             moods: [
                 { description: "unsafe", percentage: 100 },
@@ -63,6 +65,7 @@ export const dashboardDemoData: DashboardData = {
             dateCreated: '12/20/2020',
             dateModified: '12/20/2020',
             situation: ['another example'],
+            title: "another example",
             moods: [
                 { description: "unsafe", percentage: 100 },
                 { description: "upset", percentage: 100 },
