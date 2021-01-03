@@ -1,9 +1,9 @@
-import {Text} from "../components/Themed";
+import {Text} from "../../../Themed";
 import {Card} from "react-native-elements";
 import * as React from "react";
-import {ThoughtRecord} from "../types/DashboardData";
 import {TextInput, StyleSheet, Button} from "react-native";
-import HotThoughtInfo from "./HotThoughtInfo"
+import HotThoughtInfo from "./HotThoughtInfo";
+import {ThoughtRecord} from "../../../../types/DashboardData";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -19,13 +19,28 @@ function ThoughtRecordInfo({thoughtRecords, currentThoughtRecordID}: modifyThoug
                 <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
                 <Text>Title: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.title}/></Text>
                 <Text>Situation: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.situation.toString()}/></Text>
-                <Text>Moods: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.moods.toString()}/></Text>
-                <Text>Automatic Thoughts: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.automaticThoughts.toString()}/></Text>
-                <Button
-                    title="Next"
-                    onPress={HotThoughtInfo}/>
+                <Text>Moods: </Text>
+                {thoughtRecord.moods.map(mood => {
+                    return(
+                    <Card>
+                        <Text>Description: <TextInput style={style.textInputStyle} placeholder={mood.description}/></Text>
+                        <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={mood.percentage.toString()}/> </Text>
+                    </Card>)
+                })}
+                <Text>Automatic Thoughts: </Text>
+                {thoughtRecord.automaticThoughts.map(autoThought => {
+                    return(
+                        <TextInput style={style.textInputStyle} placeholder={autoThought.description}/>
+                    )
+                })}
             </Card>
+    <Button
+        onPress={() => HotThoughtInfo}
+        title="Next"
+        color="#D39999"
+    />
         </>
+
     )
 }
 

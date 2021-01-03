@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import {Card} from "react-native-elements";
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import Dashboard from "../components/Dashboard/Dashboard";
 import {useState} from "react";
-import MainTabNavButton from "../components/Dashboard/MainTabNavButton";
 import {DashboardData, dashboardDemoData} from "../types/DashboardData";
-import ModifyThoughtRecordsScreen from "./ModifyThoughtRecordsScreen";
-
+import MainTabNavButton from "../components/Dashboard/ThoughtRecords/MainTabNavButton";
+import ModifyThoughtRecordsScreen
+  from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ModifyThoughtRecordsScreen";
+import { useDispatch } from 'react-redux'
+import {addThoughtRecord} from '../reducers';
 export enum MainTabModes {
   Dashboard ="CONST_DASHBOARD",
   ModifyThoughtRecord = "CONST_THOUGHT_RECORD"
@@ -43,6 +43,10 @@ export default function MainTab(this: any) {
     setCurrentThoughtRecordID(currentThoughtRecordID);
   }
 
+  const dispatch = useDispatch();
+  dispatch(addThoughtRecord(
+      { badThoughtRecordData: 'hi Monica'}
+  ))
   return (
     <View>
       {

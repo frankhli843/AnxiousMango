@@ -25,6 +25,7 @@ type HotThought = {
     description: string,
     for: string[],
     against: string[],
+    balancedThought: string
 }
 
 export const dashboardDemoData: DashboardData = {
@@ -45,7 +46,8 @@ export const dashboardDemoData: DashboardData = {
                     hotThought: {
                         description: '',
                         for: ["my friends don't call me back", "I lost my job", "We will never go back to pre-COVID times"],
-                        against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"]
+                        against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"],
+                        balancedThought: ""
                     }
                 },
                 {
@@ -76,7 +78,8 @@ export const dashboardDemoData: DashboardData = {
                     hotThought: {
                         description: '',
                         for: ["my friends don't call me back", "I lost my job", "We will never go back to pre-COVID times"],
-                        against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"]
+                        against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"],
+                        balancedThought: ""
                     }
                 },
                 {

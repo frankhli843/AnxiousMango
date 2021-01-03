@@ -1,9 +1,9 @@
-import {Text} from "../components/Themed";
 import {Card} from "react-native-elements";
 import * as React from "react";
-import {ThoughtRecord} from "../types/DashboardData";
 import {TextInput, StyleSheet, Button} from "react-native";
 import BalancedThoughtInfo from "./BalancedThoughtInfo";
+import {ThoughtRecord} from "../../../../types/DashboardData";
+import {Text} from "../../../Themed";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -14,6 +14,7 @@ function HotThoughtInfo({thoughtRecords, currentThoughtRecordID}: modifyThoughtR
     const thoughtRecord = thoughtRecords[currentThoughtRecordID];
     return(
         <>
+            <Text>Hot Thought</Text>
             { thoughtRecord.automaticThoughts.map(thought => {  // thoughts view component
                 return<Card><Text>Description: <TextInput style={style.textInputStyle} placeholder={thought.description}/></Text>
                     <Text>Evidence for Hot Thought:

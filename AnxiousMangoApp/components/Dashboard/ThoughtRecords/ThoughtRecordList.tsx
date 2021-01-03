@@ -1,7 +1,7 @@
-import {Button, ScrollView} from "react-native";
+import {ScrollView} from "react-native";
 import {Cell, Section, TableView} from "react-native-tableview-simple";
-import {DashboardData, dashboardDemoData, ThoughtRecord} from "../../types/DashboardData";
 import * as React from "react";
+import {ThoughtRecord} from "../../../types/DashboardData";
 
 const tableViewStyles = {
     backgroundColor: '#D39999',
@@ -13,7 +13,7 @@ type thoughtRecordProps = {
     goToThoughtRecord: (id: number) => void,
 }
 
-function ThoughtRecords({thoughtRecords, goToThoughtRecord}: thoughtRecordProps) {
+function ThoughtRecordList({thoughtRecords, goToThoughtRecord}: thoughtRecordProps) {
     return <>
         <ScrollView contentContainerStyle={tableViewStyles}>
             <TableView>
@@ -38,4 +38,4 @@ function ThoughtRecords({thoughtRecords, goToThoughtRecord}: thoughtRecordProps)
     </>
 }
 
-export default ThoughtRecords;
+export default ThoughtRecordList;

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {Image, StyleSheet, View} from "react-native";
-import ThoughtRecords from "./ThoughtRecords";
-import CreateThoughtRecordButton from "./MainTabNavButton";
-import {DashboardData, dashboardDemoData, ThoughtRecord} from "../../types/DashboardData";
+import {ThoughtRecord} from "../../types/DashboardData";
+import ThoughtRecordList from "./ThoughtRecords/ThoughtRecordList";
 // install SyncStorage
 // import SyncStorage from 'sync-storage'
 
@@ -25,7 +24,7 @@ export const Dashboard = ({ thoughtRecords, goToThoughtRecord }: DashboardProps)
             <Image
                 style={{width: 100, height: 100, marginBottom: 5}}
                 source={require('../../mascot-1.png')}/>
-            <ThoughtRecords
+            <ThoughtRecordList
                 goToThoughtRecord={goToThoughtRecord}
                 thoughtRecords ={thoughtRecords}/>
         </View>
