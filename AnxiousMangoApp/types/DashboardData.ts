@@ -1,5 +1,8 @@
+import {MainTabModes} from "../screens/MainTab";
+
 export type DashboardData = {
-    thoughtRecords: ThoughtRecord[]
+    thoughtRecords: ThoughtRecord[],
+    MainTabModes?: string,
 }
 
 export type ThoughtRecord = {

@@ -8,8 +8,8 @@ import {DashboardData, dashboardDemoData} from "../types/DashboardData";
 import MainTabNavButton from "../components/Dashboard/ThoughtRecords/MainTabNavButton";
 import ModifyThoughtRecordsScreen
   from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ModifyThoughtRecordsScreen";
-import { useDispatch } from 'react-redux'
-import {addThoughtRecord} from '../reducers';
+import { useDispatch, useSelector } from 'react-redux'
+import {addThoughtRecordAction, changeModeToThoughtRecord, changeDashboardModeAction} from '../reducers';
 export enum MainTabModes {
   Dashboard ="CONST_DASHBOARD",
   ModifyThoughtRecord = "CONST_THOUGHT_RECORD"
@@ -34,19 +34,20 @@ const styles = StyleSheet.create({
 
 export default function MainTab(this: any) {
   // currentMode is string, setCurrentMode (stringInput) => void
-  const [currentMode, setCurrentMode] = useState(MainTabModes.Dashboard);
+  // use redux const [currentMode, setCurrentMode] = useState(MainTabModes.Dashboard);
   const [currentThoughtRecordID, setCurrentThoughtRecordID] = useState(-1); // -1 means no thought record selected
   // TODO use this data to show a thought record
+  const dispatch = useDispatch();
   const dashboardData: DashboardData = dashboardDemoData;
   const goToThoughtRecord = (currentThoughtRecordID: number) => {
-    setCurrentMode(MainTabModes.ModifyThoughtRecord);
-    setCurrentThoughtRecordID(currentThoughtRecordID);
+    dispatch(changeDashboardModeAction(MainTabModes.ModifyThoughtRecord)); // dispatch triggers state change
+    setCurrentThoughtRecordID(currentThoughtRecordID);  // make action redux
   }
 
-  const dispatch = useDispatch();
-  dispatch(addThoughtRecord(
-      { badThoughtRecordData: 'hi Monica'}
-  ))
+  // get current mode using useSelector()
+  const currentMode = useSelector(
+      (state: {thoughtRecordData: DashboardData}) => state.thoughtRecordData.MainTabModes)
+
   return (
     <View>
       {
@@ -56,7 +57,7 @@ export default function MainTab(this: any) {
           <MainTabNavButton
               setCurrentMode={() => {
                 setCurrentThoughtRecordID(-1); // sets current to none so we know its a new thought record
-                setCurrentMode(MainTabModes.ModifyThoughtRecord)
+                // setCurrentMode(MainTabModes.ModifyThoughtRecord)
               }}
               title="Add Thought Record"
           />
@@ -69,7 +70,7 @@ export default function MainTab(this: any) {
                   currentThoughtRecordID={currentThoughtRecordID}
                   thoughtRecords={dashboardData.thoughtRecords}/>
               <MainTabNavButton
-                  setCurrentMode={() => {setCurrentMode(MainTabModes.Dashboard)}}
+                  setCurrentMode={() => MainTabModes.Dashboard}
                   title="Back to dashboard"
               />
             </>
