@@ -1,4 +1,5 @@
 import {combineReducers} from "redux";
+import {reducer as formReducer} from "redux-form";
 import {dashboardDemoData, ThoughtRecord} from "../types/DashboardData";
 
 export default combineReducers({
