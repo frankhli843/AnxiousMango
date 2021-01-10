@@ -1,7 +1,7 @@
 import {Card} from "react-native-elements";
 import * as React from "react";
 import {StyleSheet, ScrollView, View} from "react-native";
-import ThoughtRecordInfo from "./ThoughtRecordInfo";
+import ThoughtRecordInfo from "./ThoughtRecordInfo/ThoughtRecordInfo";
 import HotThoughtInfo from "./HotThoughtInfo";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 

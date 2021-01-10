@@ -9,6 +9,7 @@ export default combineReducers({
 
 export const CONST_ADD_THOUGHT_RECORD = "CONST_ADD_THOUGHT_RECORD";
 export const CONST_CURRENT_MODE = "CONST_CURRENT_MODE"
+export const CONST_CHANGE_THOUGHT_RECORD_TITLE = "CONST_CHANGE_THOUGHT_RECORD_TITLE"
 
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
@@ -29,6 +30,14 @@ export function addThoughtRecordAction(thoughtRecord: ThoughtRecord){
     }
 }
 
+export function changeThoughtRecordTitleAction(title: string, id: number) {
+    return {
+        title,
+        id,
+        type: CONST_CHANGE_THOUGHT_RECORD_TITLE
+    }
+}
+
 function thoughtRecordData(state = {
     thoughtRecords: dashboardDemoData.thoughtRecords,
     MainTabModes: "CONST_DASHBOARD"
@@ -43,6 +52,17 @@ function thoughtRecordData(state = {
             return {
                 ...state,
                 MainTabModes: action.mode
+            }
+        case "CONST_CHANGE_THOUGHT_RECORD_TITLE":
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.id]: {
+                        ...state.thoughtRecords[action.id],
+                        title: action.title
+                    }
+                }
             }
         default:
             return state;
