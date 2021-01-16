@@ -3,26 +3,26 @@ import * as React from "react";
 import {TextInput, StyleSheet} from "react-native";
 import {useDispatch, useSelector} from "react-redux"
 import {DashboardData, ThoughtRecord} from "../../../../../types/DashboardData";
-import {changeThoughtRecordTitleAction} from "../../../../../reducers";
+import {changeThoughtRecordSituationAction, changeThoughtRecordTitleAction} from "../../../../../reducers";
 
 type modifyThoughtRecordScreenProps = {
     currentThoughtRecordID: number
 }
 
-function TitleInput({currentThoughtRecordID}: modifyThoughtRecordScreenProps) {
+function SituationInput({currentThoughtRecordID}: modifyThoughtRecordScreenProps) {
     const thoughtRecordObject = useSelector(
         (state: {thoughtRecordData: {thoughtRecords: ThoughtRecord[]}}) => {
             return state.thoughtRecordData.thoughtRecords[currentThoughtRecordID];
         })
     const dispatch = useDispatch();
     return(
-        <Text>Title:
+        <Text>Situation:
             <TextInput
                 style={style.textInputStyle}
-                placeholder={"Input a title for your thought record."}
-                value={thoughtRecordObject ? thoughtRecordObject.title: ""}
+                placeholder={"Input a situation for your thought record."}
+                value={thoughtRecordObject ? thoughtRecordObject.situation.toString() : ""}
                 onChangeText={(text) => {
-                    dispatch(changeThoughtRecordTitleAction(text, currentThoughtRecordID))
+                    dispatch(changeThoughtRecordSituationAction(text, currentThoughtRecordID))
                 } }
             />
         </Text>
@@ -36,4 +36,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default TitleInput;
+export default SituationInput;

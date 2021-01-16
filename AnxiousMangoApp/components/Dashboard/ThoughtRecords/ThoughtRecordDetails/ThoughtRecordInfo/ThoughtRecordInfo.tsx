@@ -7,6 +7,7 @@ import {ThoughtRecord} from "../../../../../types/DashboardData";
 import TitleInput from "./TitleInput";
 import {useDispatch} from "react-redux";
 import {changeDashboardModeAction, MainTabModes} from "../../../../../reducers";
+import SituationInput from "./SituationInput";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -28,19 +29,20 @@ function ThoughtRecordInfo({thoughtRecords, currentThoughtRecordID}: modifyThoug
                 />
                 <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
                 <TitleInput currentThoughtRecordID={currentThoughtRecordID}/>
-                <Text>Situation: <TextInput style={style.textInputStyle} placeholder={thoughtRecord.situation.toString()}/></Text>
+                <SituationInput currentThoughtRecordID={currentThoughtRecordID}/>
+                {/*<Text>Situation: <TextInput style={style.textInputStyle} placeholder={"Add situation"}/></Text>*/}
                 <Text>Moods: </Text>
                 {thoughtRecord.moods.map(mood => {
                     return(
                     <Card>
-                        <Text>Description: <TextInput style={style.textInputStyle} placeholder={mood.description}/></Text>
-                        <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={mood.percentage.toString()}/> </Text>
+                        <Text>Description: <TextInput style={style.textInputStyle} placeholder={"Add a description"}/></Text>
+                        <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={"Add mood percentage here"}/> </Text>
                     </Card>)
                 })}
                 <Text>Automatic Thoughts: </Text>
                 {thoughtRecord.automaticThoughts.map(autoThought => {
                     return(
-                        <TextInput style={style.textInputStyle} placeholder={autoThought.description}/>
+                        <TextInput style={style.textInputStyle} placeholder={"Add automatic thought"}/>
                     )
                 })}
             </Card>
