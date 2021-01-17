@@ -35,4 +35,4 @@
 # Other Apps In Same Domain
 - MySSP, way to contact and find someone to talk to.
 
-![app design](images/Screen Shot 2021-01-17 at 5.19.30 PM.png)
+![app design](images/design.png)
