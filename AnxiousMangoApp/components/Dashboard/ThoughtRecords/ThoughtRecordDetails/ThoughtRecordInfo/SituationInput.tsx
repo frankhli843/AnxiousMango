@@ -20,7 +20,7 @@ function SituationInput({currentThoughtRecordID}: modifyThoughtRecordScreenProps
             <TextInput
                 style={style.textInputStyle}
                 placeholder={"Input a situation for your thought record."}
-                value={thoughtRecordObject ? thoughtRecordObject.situation.toString() : ""}
+                value={thoughtRecordObject ? thoughtRecordObject.situationList.toString() : ""}
                 onChangeText={(text) => {
                     dispatch(changeThoughtRecordSituationAction(text, currentThoughtRecordID))
                 } }

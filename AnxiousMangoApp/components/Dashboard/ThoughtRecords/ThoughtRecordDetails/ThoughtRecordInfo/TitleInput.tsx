@@ -4,6 +4,7 @@ import {TextInput, StyleSheet} from "react-native";
 import {useDispatch, useSelector} from "react-redux"
 import {DashboardData, ThoughtRecord} from "../../../../../types/DashboardData";
 import {changeThoughtRecordTitleAction} from "../../../../../reducers";
+import ReduxInput from "../../../../../common/ReduxInput";
 
 type modifyThoughtRecordScreenProps = {
     currentThoughtRecordID: number
@@ -15,17 +16,16 @@ function TitleInput({currentThoughtRecordID}: modifyThoughtRecordScreenProps) {
             return state.thoughtRecordData.thoughtRecords[currentThoughtRecordID];
         })
     const dispatch = useDispatch();
-    return(
-        <Text>Title:
-            <TextInput
-                style={style.textInputStyle}
-                placeholder={"Input a title for your thought record."}
-                value={thoughtRecordObject ? thoughtRecordObject.title: ""}
-                onChangeText={(text) => {
-                    dispatch(changeThoughtRecordTitleAction(text, currentThoughtRecordID))
-                } }
-            />
-        </Text>
+
+    return (
+        <ReduxInput
+            label={"Title"}
+            placeHolder={"Input a title for your thought record."}
+            value={thoughtRecordObject ? thoughtRecordObject.title: ""}
+            onChangeTextFunc={(text) => {
+                dispatch(changeThoughtRecordTitleAction(text, currentThoughtRecordID))
+            }}
+        />
     )
 }
 

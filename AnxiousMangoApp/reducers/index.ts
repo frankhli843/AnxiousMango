@@ -11,6 +11,8 @@ export const CONST_ADD_THOUGHT_RECORD = "CONST_ADD_THOUGHT_RECORD";
 export const CONST_CURRENT_MODE = "CONST_CURRENT_MODE"
 export const CONST_CHANGE_THOUGHT_RECORD_TITLE = "CONST_CHANGE_THOUGHT_RECORD_TITLE"
 export const CONST_CHANGE_THOUGHT_RECORD_SITUATION = "CONST_CHANGE_THOUGHT_RECORD_SITUATION"
+export const CONST_REMOVE_SITUATION_ACTION = "CONST_REMOVE_SITUATION_ACTION"
+export const CONST_ADD_SITUATION_ACTION = "CONST_ADD_SITUATION_ACTION"
 
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
@@ -47,6 +49,21 @@ export function changeThoughtRecordSituationAction(situation: string, id: number
     }
 }
 
+export function removeThoughtRecordSituationAction(id: number, situationIndex: number) {
+    return {
+        id,
+        situationIndex,
+        type: CONST_REMOVE_SITUATION_ACTION
+    }
+}
+
+export function addThoughtRecordSituationAction(thoughtRecID: number) {
+    return {
+        thoughtRecID,
+        type: CONST_ADD_SITUATION_ACTION
+    }
+}
+
 function thoughtRecordData(state = {
     thoughtRecords: dashboardDemoData.thoughtRecords,
     MainTabModes: "CONST_DASHBOARD"
@@ -80,7 +97,34 @@ function thoughtRecordData(state = {
                     ...state.thoughtRecords,
                     [action.id]: {
                         ...state.thoughtRecords[action.id],
-                        situation: action.situation
+                        situationList: action.situation
+                    }
+                }
+            }
+        case "CONST_REMOVE_SITUATION_ACTION":
+            const situationArray = state.thoughtRecords[action.id].situationList
+                .filter((situation, i) => i !== action.situationIndex)
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.id]: {
+                        ...state.thoughtRecords[action.id],
+                        situationList: situationArray
+                    }
+                }
+            }
+        case "CONST_ADD_SITUATION_ACTION":
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        situationList: [
+                            ...state.thoughtRecords[action.thoughtRecID].situationList,
+                            ""
+                        ]
                     }
                 }
             }
