@@ -13,6 +13,8 @@ export const CONST_CHANGE_THOUGHT_RECORD_TITLE = "CONST_CHANGE_THOUGHT_RECORD_TI
 export const CONST_CHANGE_THOUGHT_RECORD_SITUATION = "CONST_CHANGE_THOUGHT_RECORD_SITUATION"
 export const CONST_REMOVE_SITUATION_ACTION = "CONST_REMOVE_SITUATION_ACTION"
 export const CONST_ADD_SITUATION_ACTION = "CONST_ADD_SITUATION_ACTION"
+export const CONST_CHANGE_MOOD_ACTION = "CONST_CHANGE_MOOD_ACTION"
+export const CONST_CHANGE_AUTO_THOUGHT_ACTION = "CONST_CHANGE_AUTO_THOUGHT_ACTION"
 
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
@@ -61,6 +63,20 @@ export function addThoughtRecordSituationAction(thoughtRecID: number) {
     return {
         thoughtRecID,
         type: CONST_ADD_SITUATION_ACTION
+    }
+}
+
+export function changeMoodAction(thoughtRecID: number) {
+    return {
+        thoughtRecID,
+        type: CONST_CHANGE_MOOD_ACTION
+    }
+}
+
+export function changeAutoThoughtAction(thoughtRecID: number) {
+    return {
+        thoughtRecID,
+        type: CONST_CHANGE_AUTO_THOUGHT_ACTION
     }
 }
 
@@ -125,6 +141,34 @@ function thoughtRecordData(state = {
                             ...state.thoughtRecords[action.thoughtRecID].situationList,
                             ""
                         ]
+                    }
+                }
+            }
+        case "CONST_CHANGE_MOOD_ACTION":
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        moods: [{
+                            ...state.thoughtRecords[action.thoughtRecID].moods,
+                            description: action.description
+                        }]
+                    }
+                }
+            }
+        case "CONST_CHANGE_AUTO_THOUGHT_ACTION":
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        automaticThoughts: [{
+                            ...state.thoughtRecords[action.thoughtRecID].automaticThoughts,
+                            description: action.description
+                        }]
                     }
                 }
             }

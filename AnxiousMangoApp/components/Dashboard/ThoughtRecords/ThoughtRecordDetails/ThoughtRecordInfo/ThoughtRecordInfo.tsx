@@ -7,11 +7,12 @@ import {ThoughtRecord} from "../../../../../types/DashboardData";
 import TitleInput from "./TitleInput";
 import {useDispatch, useSelector} from "react-redux";
 import {
+    changeMoodAction,
     addThoughtRecordSituationAction,
     changeDashboardModeAction,
     changeThoughtRecordSituationAction,
     changeThoughtRecordTitleAction,
-    MainTabModes, removeThoughtRecordSituationAction
+    MainTabModes, removeThoughtRecordSituationAction, changeAutoThoughtAction
 } from "../../../../../reducers";
 import SituationInput from "./SituationInput";
 import ReduxInput from "../../../../../common/ReduxInput";
@@ -72,17 +73,33 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
 
                 {/*<Text>Situation: <TextInput style={style.textInputStyle} placeholder={"Add situation"}/></Text>*/}
                 <Text>Moods: </Text>
-                {thoughtRecord.moods.map(mood => {
-                    return(
-                    <Card>
-                        <Text>Description: <TextInput style={style.textInputStyle} placeholder={"Add a description"}/></Text>
-                        <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={"Add mood percentage here"}/> </Text>
-                    </Card>)
+                {
+                    thoughtRecord.moods.map(mood => {
+                        return(
+                        // <Text>Description: <TextInput style={style.textInputStyle} placeholder={"Add a description"}/></Text>
+                        // <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={"Add mood percentage here"}/> </Text>
+                            <ReduxInput
+                                label={"Description"}
+                                placeHolder={"Input a mood"}
+                                value={mood.description}
+                                onChangeTextFunc={() => {
+                                    dispatch(changeMoodAction(currentThoughtRecordID))
+                                }}
+                            />
+                        )
                 })}
                 <Text>Automatic Thoughts: </Text>
                 {thoughtRecord.automaticThoughts.map(autoThought => {
                     return(
-                        <TextInput style={style.textInputStyle} placeholder={"Add automatic thought"}/>
+                        // <TextInput style={style.textInputStyle} placeholder={"Add automatic thought"}/>
+                        <ReduxInput
+                            label={"Automatic Thought"}
+                            placeHolder={"Input an automatic thought"}
+                            value={autoThought.description}
+                            onChangeTextFunc={() => {
+                                dispatch(changeAutoThoughtAction(currentThoughtRecordID))
+                            }}
+                        />
                     )
                 })}
             </Card>
