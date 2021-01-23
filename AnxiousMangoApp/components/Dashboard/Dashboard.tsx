@@ -42,6 +42,7 @@ export const Dashboard = ({ thoughtRecords, goToThoughtRecord }: DashboardProps)
 
 }
 
+// why does the background colour not fill the whole screen?
 const styles = StyleSheet.create({
     getStartedContainer: {
         alignItems: 'center',

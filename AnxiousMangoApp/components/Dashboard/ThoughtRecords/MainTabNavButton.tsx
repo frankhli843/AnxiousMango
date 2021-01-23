@@ -23,7 +23,7 @@ const style = StyleSheet.create({
         position: "relative",
         bottom:0,
         left:0,
-        marginTop: 35
+        marginTop: 35,
     }
 })
 

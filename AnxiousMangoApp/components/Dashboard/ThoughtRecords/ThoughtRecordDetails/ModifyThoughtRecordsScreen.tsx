@@ -15,14 +15,11 @@ function ModifyThoughtRecordsScreen({thoughtRecords, currentThoughtRecordID}: mo
     const canEdit: boolean = false;
     return (
         <View style={styles.view}>
-        <Card>
                 <ScrollView style={styles.card}>
                     <ThoughtRecordInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
                     <HotThoughtInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
                 </ScrollView>
-            </Card>
         </View>
-
     )
 }
 

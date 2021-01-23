@@ -1,4 +1,5 @@
 import {Text} from "../../../../Themed";
+import {View} from "react-native";
 import {Card} from "react-native-elements";
 import * as React from "react";
 import {TextInput, StyleSheet, Button} from "react-native";
@@ -16,6 +17,8 @@ import {
 } from "../../../../../reducers";
 import SituationInput from "./SituationInput";
 import ReduxInput from "../../../../../common/ReduxInput";
+import {useFonts} from "@expo-google-fonts/rubik";
+import {AppLoading} from "expo";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -27,14 +30,21 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
         (state: {thoughtRecordData: {thoughtRecords: ThoughtRecord[]}}) => {
             return state.thoughtRecordData.thoughtRecords[currentThoughtRecordID];
     })
+    let [fontsLoaded] = useFonts({
+        'Rubik_400Regular': require('../../../../../assets/fonts/Rubik-VariableFont_wght.ttf')
+    })
     const dispatch = useDispatch();
-    return(
-        <>
-            <Text>Thought Record</Text>
-            <Card>
+
+    if (!fontsLoaded) {
+        return <AppLoading/>
+    } else {
+        return (
+            <View style={styles.container}>
+                <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 36, alignSelf: "center"}}>{thoughtRecord.title}</Text>
+                <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 24, alignSelf: "center"}}>{thoughtRecord.dateCreated}</Text>
                 <Button
                     title={"Back to dashboard"}
-                    onPress={()=>{
+                    onPress={() => {
                         dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
                     }}
                 />
@@ -42,7 +52,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                 <ReduxInput
                     label={"Title"}
                     placeHolder={"Input a title for your thought record."}
-                    value={thoughtRecord ? thoughtRecord.title: ""}
+                    value={thoughtRecord ? thoughtRecord.title : ""}
                     onChangeTextFunc={(text) => {
                         dispatch(changeThoughtRecordTitleAction(text, currentThoughtRecordID))
                     }}
@@ -50,7 +60,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                 {/*<SituationInput currentThoughtRecordID={currentThoughtRecordID}/>*/}
                 {
                     thoughtRecord.situationList.map((situation, i) => {
-                        return(
+                        return (
                             <>
                                 <ReduxInput
                                     label={"Situation"}
@@ -60,14 +70,14 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                                         dispatch(changeThoughtRecordSituationAction(text, currentThoughtRecordID))
                                     }}
                                 />
-                                <Button title={"X"} onPress={()=>{
+                                <Button title={"X"} onPress={() => {
                                     dispatch(removeThoughtRecordSituationAction(currentThoughtRecordID, i))
                                 }}/>
                             </>
                         )
                     })
                 }
-                <Button title={"Add"} onPress={()=>{
+                <Button title={"Add"} onPress={() => {
                     dispatch(addThoughtRecordSituationAction(currentThoughtRecordID))
                 }}/>
 
@@ -75,9 +85,9 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                 <Text>Moods: </Text>
                 {
                     thoughtRecord.moods.map(mood => {
-                        return(
-                        // <Text>Description: <TextInput style={style.textInputStyle} placeholder={"Add a description"}/></Text>
-                        // <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={"Add mood percentage here"}/> </Text>
+                        return (
+                            // <Text>Description: <TextInput style={style.textInputStyle} placeholder={"Add a description"}/></Text>
+                            // <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={"Add mood percentage here"}/> </Text>
                             <ReduxInput
                                 label={"Description"}
                                 placeHolder={"Input a mood"}
@@ -87,10 +97,10 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                                 }}
                             />
                         )
-                })}
+                    })}
                 <Text>Automatic Thoughts: </Text>
                 {thoughtRecord.automaticThoughts.map(autoThought => {
-                    return(
+                    return (
                         // <TextInput style={style.textInputStyle} placeholder={"Add automatic thought"}/>
                         <ReduxInput
                             label={"Automatic Thought"}
@@ -102,21 +112,21 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                         />
                     )
                 })}
-            </Card>
-    <Button
-        onPress={() => HotThoughtInfo}
-        title="Next"
-        color="#D39999"
-    />
-        </>
+                <Button
+                    onPress={() => HotThoughtInfo}
+                    title="Next"
+                    color="#D39999"
+                />
+            </View>
 
-    )
+        )
+    }
 }
 
-const style = StyleSheet.create({
-    textInputStyle: {
-        borderWidth: 1,
-        borderColor: 'black'
+const styles = StyleSheet.create({
+    container: {
+        alignItems: "center",
+        backgroundColor: "#E5E5E5",
     }
 })
 

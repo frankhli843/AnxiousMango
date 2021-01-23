@@ -144,6 +144,8 @@ function thoughtRecordData(state = {
                     }
                 }
             }
+
+            // why does this delete the other mood when you want to change one?
         case "CONST_CHANGE_MOOD_ACTION":
             return {
                 ...state,
