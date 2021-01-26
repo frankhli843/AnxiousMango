@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
+import {HotThought} from "../types/DashboardData";
 import {dashboardDemoData, ThoughtRecord} from "../types/DashboardData";
 
 export default combineReducers({
@@ -43,18 +44,19 @@ export function changeThoughtRecordTitleAction(title: string, id: number) {
     }
 }
 
-export function changeThoughtRecordSituationAction(situation: string, id: number) {
-    return {
+export function changeThoughtRecordSituationAction(situation: string, thoughtRecID: number, situationID: number) {
+    return { // TODO here is where thoughtRecordID is coming undefined
         situation,
-        id,
+        thoughtRecID,
+        situationID,
         type: CONST_CHANGE_THOUGHT_RECORD_SITUATION
     }
 }
 
-export function removeThoughtRecordSituationAction(id: number, situationIndex: number) {
+export function removeThoughtRecordSituationAction(thoughtRecID: number, situationID: number) {
     return {
-        id,
-        situationIndex,
+        thoughtRecID,
+        situationID,
         type: CONST_REMOVE_SITUATION_ACTION
     }
 }
@@ -66,16 +68,22 @@ export function addThoughtRecordSituationAction(thoughtRecID: number) {
     }
 }
 
-export function changeMoodAction(thoughtRecID: number) {
+export function changeMoodAction(thoughtRecID: number, moodID: number, description: string, percentage: number) {
     return {
         thoughtRecID,
+        moodID,
+        description,
+        percentage,
         type: CONST_CHANGE_MOOD_ACTION
     }
 }
 
-export function changeAutoThoughtAction(thoughtRecID: number) {
+export function changeAutoThoughtAction(thoughtRecID: number, autoThoughtID: number, description: string, hotThought?: HotThought) {
     return {
         thoughtRecID,
+        autoThoughtID,
+        description,
+        hotThought,
         type: CONST_CHANGE_AUTO_THOUGHT_ACTION
     }
 }
@@ -111,21 +119,29 @@ function thoughtRecordData(state = {
                 ...state,
                 thoughtRecords: {
                     ...state.thoughtRecords,
-                    [action.id]: {
-                        ...state.thoughtRecords[action.id],
-                        situationList: action.situation
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        situationList: [
+                            ...state.thoughtRecords[action.thoughtRecID].situationList.filter((situation, i) => {
+                                return i < action.situationID
+                            }),
+                            action.situation,
+                            ...state.thoughtRecords[action.thoughtRecID].situationList.filter((situation, i) => {
+                                return i > action.situationID
+                            }),
+                        ]
                     }
                 }
             }
         case "CONST_REMOVE_SITUATION_ACTION":
-            const situationArray = state.thoughtRecords[action.id].situationList
-                .filter((situation, i) => i !== action.situationIndex)
+            const situationArray = state.thoughtRecords[action.thoughtRecID].situationList
+                .filter((situation, i) => i !== action.situationID)
             return {
                 ...state,
                 thoughtRecords: {
                     ...state.thoughtRecords,
-                    [action.id]: {
-                        ...state.thoughtRecords[action.id],
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
                         situationList: situationArray
                     }
                 }
@@ -147,16 +163,22 @@ function thoughtRecordData(state = {
 
             // why does this delete the other mood when you want to change one?
         case "CONST_CHANGE_MOOD_ACTION":
+
             return {
                 ...state,
                 thoughtRecords: {
                     ...state.thoughtRecords,
                     [action.thoughtRecID]: {
                         ...state.thoughtRecords[action.thoughtRecID],
-                        moods: [{
-                            ...state.thoughtRecords[action.thoughtRecID].moods,
-                            description: action.description
-                        }]
+                        moods: [
+                            ...state.thoughtRecords[action.thoughtRecID].moods.filter(
+                                (m, i) => {return i < action.moodID}
+                            ),
+                            { percentage: action.percentage, description: action.description},
+                            ...state.thoughtRecords[action.thoughtRecID].moods.filter(
+                                (m, i) => {return i > action.moodID}
+                            ),
+                        ]
                     }
                 }
             }
@@ -167,10 +189,15 @@ function thoughtRecordData(state = {
                     ...state.thoughtRecords,
                     [action.thoughtRecID]: {
                         ...state.thoughtRecords[action.thoughtRecID],
-                        automaticThoughts: [{
-                            ...state.thoughtRecords[action.thoughtRecID].automaticThoughts,
-                            description: action.description
-                        }]
+                        automaticThoughts: [
+                            ...state.thoughtRecords[action.thoughtRecID].automaticThoughts.filter(
+                                (t, index) => {return index < action.autoThoughtID}
+                            ),
+                            { description: action.description, hotThought: action.hotThought },
+                            ...state.thoughtRecords[action.thoughtRecID].automaticThoughts.filter(
+                                (t, index) => {return index > action.autoThoughtID}
+                                )
+                        ]
                     }
                 }
             }

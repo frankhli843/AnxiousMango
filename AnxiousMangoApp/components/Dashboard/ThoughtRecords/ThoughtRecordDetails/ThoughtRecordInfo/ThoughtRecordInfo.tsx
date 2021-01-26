@@ -67,7 +67,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                                     placeHolder={"Input a situation for your thought record."}
                                     value={situation}
                                     onChangeTextFunc={(text) => {
-                                        dispatch(changeThoughtRecordSituationAction(text, currentThoughtRecordID))
+                                        dispatch(changeThoughtRecordSituationAction(text, currentThoughtRecordID, i))
                                     }}
                                 />
                                 <Button title={"X"} onPress={() => {
@@ -84,30 +84,43 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                 {/*<Text>Situation: <TextInput style={style.textInputStyle} placeholder={"Add situation"}/></Text>*/}
                 <Text>Moods: </Text>
                 {
-                    thoughtRecord.moods.map(mood => {
+                    thoughtRecord.moods.map((mood, moodIndex) => {
                         return (
                             // <Text>Description: <TextInput style={style.textInputStyle} placeholder={"Add a description"}/></Text>
                             // <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={"Add mood percentage here"}/> </Text>
                             <ReduxInput
+                                // separates diff't elements so when something is deleted, react knows which is which
+                                key={`Mood-input-${currentThoughtRecordID}-${moodIndex}`}
                                 label={"Description"}
                                 placeHolder={"Input a mood"}
                                 value={mood.description}
-                                onChangeTextFunc={() => {
-                                    dispatch(changeMoodAction(currentThoughtRecordID))
+                                onChangeTextFunc={(textInput) => {
+                                    dispatch(changeMoodAction(
+                                        currentThoughtRecordID,
+                                        moodIndex,
+                                        textInput,
+                                        mood.percentage
+                                    ))
                                 }}
                             />
                         )
                     })}
                 <Text>Automatic Thoughts: </Text>
-                {thoughtRecord.automaticThoughts.map(autoThought => {
+                {thoughtRecord.automaticThoughts.map((autoThought, autoThoughtIndex) => {
                     return (
                         // <TextInput style={style.textInputStyle} placeholder={"Add automatic thought"}/>
                         <ReduxInput
+                            key={`Auto-thought-${currentThoughtRecordID}-${autoThoughtIndex}`}
                             label={"Automatic Thought"}
                             placeHolder={"Input an automatic thought"}
                             value={autoThought.description}
-                            onChangeTextFunc={() => {
-                                dispatch(changeAutoThoughtAction(currentThoughtRecordID))
+                            onChangeTextFunc={(textInput) => {
+                                dispatch(changeAutoThoughtAction(
+                                    currentThoughtRecordID,
+                                    autoThoughtIndex,
+                                    textInput,
+                                autoThought.hotThought
+                                ))
                             }}
                         />
                     )
