@@ -4,6 +4,8 @@ import {StyleSheet, ScrollView, View} from "react-native";
 import ThoughtRecordInfo from "./ThoughtRecordInfo/ThoughtRecordInfo";
 import HotThoughtInfo from "./HotThoughtInfo";
 import {ThoughtRecord} from "../../../../types/DashboardData";
+import {autofill} from "redux-form";
+import BalancedThoughtInfo from "./BalancedThoughtInfo";
 
 
 type modifyThoughtRecordScreenProps = {
@@ -18,6 +20,7 @@ function ModifyThoughtRecordsScreen({thoughtRecords, currentThoughtRecordID}: mo
                 <ScrollView style={styles.card}>
                     <ThoughtRecordInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
                     <HotThoughtInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
+                    <BalancedThoughtInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
                 </ScrollView>
         </View>
     )
@@ -30,7 +33,8 @@ const styles = StyleSheet.create ({
 
     view: {
         flex: 1,
-        height: '100%'
+        aspectRatio: 1.5,
+        height: 500
     }
 })
 

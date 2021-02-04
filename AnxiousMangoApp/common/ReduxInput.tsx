@@ -9,7 +9,8 @@ type modifyThoughtRecordScreenProps = {
     label: string,
     placeHolder: string,
     value: string,
-    onChangeTextFunc: (newValue: string) => void
+    onChangeTextFunc: (newValue: string) => void,
+    removeButton?: Node
 }
 
 
@@ -17,26 +18,41 @@ function ReduxInput({
     label,
     placeHolder,
     value,
-    onChangeTextFunc
+    onChangeTextFunc,
+    removeButton
 }: modifyThoughtRecordScreenProps) {
     return(
-        <Text>{label}
-            <TextInput
-                style={style.textInputStyle}
-                placeholder={placeHolder}
-                value={value}
-                onChangeText={(text) => {
-                    onChangeTextFunc(text)
-                } }
-            />
-        </Text>
+
+            <Text style={style.ReduxInputContainer}>
+                {label}
+                <TextInput
+                    multiline={true}
+                    style={style.textInputStyle}
+                    placeholder={placeHolder}
+                    value={value}
+                    onChangeText={(text) => {
+                        onChangeTextFunc(text)
+                    } }
+                />
+                {removeButton}
+            </Text>
     )
 }
 
 const style = StyleSheet.create({
+    ReduxInputContainer: {
+        display:"flex",
+        flexDirection: "row",
+        width: "90%",
+        minHeight: 35
+    },
     textInputStyle: {
         borderWidth: 1,
-        borderColor: 'black'
+        marginLeft: '10px',
+        width: '100%',
+        paddingLeft: '10px',
+        borderColor: 'black',
+
     }
 })
 
