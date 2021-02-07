@@ -19,8 +19,6 @@ function ModifyThoughtRecordsScreen({thoughtRecords, currentThoughtRecordID}: mo
         <View style={styles.view}>
                 <ScrollView style={styles.card}>
                     <ThoughtRecordInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
-                    <HotThoughtInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
-                    <BalancedThoughtInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
                 </ScrollView>
         </View>
     )

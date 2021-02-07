@@ -1,9 +1,10 @@
 import {Card} from "react-native-elements";
 import * as React from "react";
-import {TextInput, StyleSheet, Button} from "react-native";
-import BalancedThoughtInfo from "./BalancedThoughtInfo";
+import {Button, StyleSheet, TextInput} from "react-native";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 import {Text} from "../../../Themed";
+import {useDispatch} from "react-redux";
+import {changeDashboardModeAction, MainTabModes} from "../../../../actions/thoughtRecordActions";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -12,6 +13,7 @@ type modifyThoughtRecordScreenProps = {
 
 function HotThoughtInfo({thoughtRecords, currentThoughtRecordID}: modifyThoughtRecordScreenProps) {
     const thoughtRecord = thoughtRecords[currentThoughtRecordID];
+    const dispatch = useDispatch();
     return(
         <>
             <Text>Hot Thought</Text>
@@ -29,7 +31,7 @@ function HotThoughtInfo({thoughtRecords, currentThoughtRecordID}: modifyThoughtR
                 </Card>
             })}
             <Button
-                onPress={() => BalancedThoughtInfo}
+                onPress={() => {dispatch(changeDashboardModeAction(MainTabModes.BalancedThoughtInfo))}}
                 title="Next"/>
         </>
     )

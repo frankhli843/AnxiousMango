@@ -1,24 +1,21 @@
 import {Text} from "../../../../Themed";
-import {View} from "react-native";
-import {Card} from "react-native-elements";
+import {Button, StyleSheet, View} from "react-native";
 import * as React from "react";
-import {TextInput, StyleSheet, Button} from "react-native";
-import HotThoughtInfo from "../HotThoughtInfo";
 import {ThoughtRecord} from "../../../../../types/DashboardData";
-import TitleInput from "./TitleInput";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    changeMoodAction,
-    addThoughtRecordSituationAction,
-    changeDashboardModeAction,
-    changeThoughtRecordSituationAction,
-    changeThoughtRecordTitleAction,
-    MainTabModes, removeThoughtRecordSituationAction, changeAutoThoughtAction
-} from "../../../../../reducers";
-import SituationInput from "./SituationInput";
 import ReduxInput from "../../../../../common/ReduxInput";
 import {useFonts} from "@expo-google-fonts/rubik";
 import {AppLoading} from "expo";
+import {
+    addMoodAction,
+    addThoughtRecordSituationAction,
+    changeAutoThoughtAction,
+    changeDashboardModeAction,
+    changeMoodAction,
+    changeThoughtRecordSituationAction,
+    changeThoughtRecordTitleAction, MainTabModes,
+    removeThoughtRecordSituationAction
+} from "../../../../../actions/thoughtRecordActions";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -60,6 +57,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                 {/*<SituationInput currentThoughtRecordID={currentThoughtRecordID}/>*/}
                 {
                     thoughtRecord.situationList.map((situation, i) => {
+
                         return (
                             <>
                                 <ReduxInput
@@ -69,10 +67,14 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                                     onChangeTextFunc={(text) => {
                                         dispatch(changeThoughtRecordSituationAction(text, currentThoughtRecordID, i))
                                     }}
+                                    // @ts-ignore
+                                    removeButton={
+                                        <Button title={"X"} onPress={() => {
+                                            dispatch(removeThoughtRecordSituationAction(currentThoughtRecordID, i))
+                                        }}/>
+                                    }
                                 />
-                                <Button title={"X"} onPress={() => {
-                                    dispatch(removeThoughtRecordSituationAction(currentThoughtRecordID, i))
-                                }}/>
+
                             </>
                         )
                     })
@@ -91,7 +93,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                             <ReduxInput
                                 // separates diff't elements so when something is deleted, react knows which is which
                                 key={`Mood-input-${currentThoughtRecordID}-${moodIndex}`}
-                                label={"Description"}
+                                label={`Mood ${moodIndex + 1}`}
                                 placeHolder={"Input a mood"}
                                 value={mood.description}
                                 onChangeTextFunc={(textInput) => {
@@ -104,7 +106,15 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                                 }}
                             />
                         )
-                    })}
+                    }
+                    )
+                }
+                <Button
+                    title={"Add"}
+                    onPress={() =>
+                        dispatch(addMoodAction(currentThoughtRecordID))}>
+                </Button>
+
                 <Text>Automatic Thoughts: </Text>
                 {thoughtRecord.automaticThoughts.map((autoThought, autoThoughtIndex) => {
                     return (
@@ -126,7 +136,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                     )
                 })}
                 <Button
-                    onPress={() => HotThoughtInfo}
+                    onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThoughtInfo))}
                     title="Next"
                     color="#D39999"
                 />
