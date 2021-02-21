@@ -30,9 +30,9 @@ export const Dashboard = ({ thoughtRecords, goToThoughtRecord }: DashboardProps)
         return <>
             <View style={styles.getStartedContainer}>
                 <Image
-                    style={{width: 100, height: 100, marginBottom: 10}}
+                    style={{width: 100, height: 100, marginBottom: 10, marginTop: 10}}
                     source={require('../../mascot-1.png')}/>
-                <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 48}}>Anxious Mango</Text>
+                {/*<Text style={{fontFamily: 'Rubik_400Regular', fontSize: 48}}>Anxious Mango</Text>*/}
                 <ThoughtRecordList
                     goToThoughtRecord={goToThoughtRecord}
                     thoughtRecords ={thoughtRecords}/>
