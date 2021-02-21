@@ -24,7 +24,7 @@ type AutomaticThought = {
     hotThought?: HotThought
 }
 
-type HotThought = {
+export type HotThought = {
     description: string,
     for: string[],
     against: string[],
