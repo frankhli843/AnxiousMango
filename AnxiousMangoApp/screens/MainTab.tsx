@@ -71,10 +71,6 @@ export default function MainTab(this: any) {
             <ModifyThoughtRecordsScreen
                 currentThoughtRecordID={currentThoughtRecordID}
                 thoughtRecords={dashboardData.thoughtRecords}/>
-            <MainTabNavButton
-                setCurrentMode={() => MainTabModes.Dashboard}
-                title="Back to dashboard"
-            />
           </>
         }
         {
@@ -83,17 +79,6 @@ export default function MainTab(this: any) {
            <HotThoughtInfo
                thoughtRecords={dashboardData.thoughtRecords}
                currentThoughtRecordID={currentThoughtRecordID}/>
-            <MainTabNavButton
-                setCurrentMode={() => MainTabModes.ModifyThoughtRecord}
-                title="Back to thought record info"
-            />
-            <MainTabNavButton
-                setCurrentMode={() => MainTabModes.BalancedThoughtInfo}
-                title="Next"/>
-            <MainTabNavButton
-                setCurrentMode={() => MainTabModes.Dashboard}
-                title="Back to dashboard"
-            />
           </>
         }
         {
@@ -102,19 +87,8 @@ export default function MainTab(this: any) {
             <BalancedThoughtInfo
                 thoughtRecords={dashboardData.thoughtRecords}
                 currentThoughtRecordID={currentThoughtRecordID}/>
-            <MainTabNavButton
-                setCurrentMode={() => MainTabModes.HotThoughtInfo}
-                title="Back to hot thought info"
-            />
-            <MainTabNavButton
-                setCurrentMode={() => MainTabModes.Dashboard}
-                title="Back to dashboard"
-            />
           </>
         }
-
-
-        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)"/>
       </View>
   );
 }

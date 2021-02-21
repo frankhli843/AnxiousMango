@@ -16,11 +16,9 @@ type modifyThoughtRecordScreenProps = {
 function ModifyThoughtRecordsScreen({thoughtRecords, currentThoughtRecordID}: modifyThoughtRecordScreenProps){
     const canEdit: boolean = false;
     return (
-        <View style={styles.view}>
-                <ScrollView style={styles.card}>
-                    <ThoughtRecordInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
-                </ScrollView>
-        </View>
+        <ScrollView style={styles.card}>
+            <ThoughtRecordInfo thoughtRecords={thoughtRecords} currentThoughtRecordID={currentThoughtRecordID}/>
+        </ScrollView>
     )
 }
 
@@ -28,7 +26,6 @@ const styles = StyleSheet.create ({
     card: {
         flex: 1
     },
-
     view: {
         flex: 1,
         aspectRatio: 1.5,

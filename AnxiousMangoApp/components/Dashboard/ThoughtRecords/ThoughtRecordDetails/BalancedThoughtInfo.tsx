@@ -1,7 +1,7 @@
 import {Text} from "../../../Themed";
 import {Card} from "react-native-elements";
 import * as React from "react";
-import {TextInput, StyleSheet, ScrollView, View} from "react-native";
+import {ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 import {useSelector} from "react-redux";
 import {useFonts} from "@expo-google-fonts/rubik";
@@ -17,21 +17,21 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
         'Rubik_400Regular': require('../../../../assets/fonts/Rubik-VariableFont_wght.ttf')
     })
     const thoughtRecord = useSelector(
-        (state: {thoughtRecordData: {thoughtRecords: ThoughtRecord[]}}) => {
+        (state: { thoughtRecordData: { thoughtRecords: ThoughtRecord[] } }) => {
             return state.thoughtRecordData.thoughtRecords[currentThoughtRecordID];
         })
 
     if (!fontsLoaded) {
         return <AppLoading/>
     } else {
-        return(
-            <View style={styles.container}>
-                <ScrollView>
-                <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 36, alignSelf: "center"}}>Balanced Thoughts</Text>
-                    { thoughtRecord.automaticThoughts.map(hotThought => {
-                        return(
-                            <View style={styles.container}>
-                                <Card>
+        return (
+            <ScrollView style={styles.card}>
+                <View style={styles.container}/>
+                <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 36, alignSelf: "center"}}>Balanced
+                    Thoughts</Text>
+                {thoughtRecord.automaticThoughts.map(hotThought => {
+                    return (
+                        <Card>
                             <Text>
                                 Hot Thought:
                                 <TextInput
@@ -45,24 +45,23 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
                                     placeholder={hotThought.hotThought?.for.toString()}/>
                             </Text>
                             <Text>
-                            Evidence against:
-                            <TextInput
-                                style={styles.textInputStyle}
-                                placeholder={hotThought.hotThought?.against.toString()}/>
+                                Evidence against:
+                                <TextInput
+                                    style={styles.textInputStyle}
+                                    placeholder={hotThought.hotThought?.against.toString()}/>
                             </Text>
                             <Text>
-                            Balanced thought:
-                            <TextInput
-                                style={styles.textInputStyle}
-                                placeholder={hotThought.hotThought?.balancedThought}/>
+                                Balanced thought:
+                                <TextInput
+                                    style={styles.textInputStyle}
+                                    placeholder={hotThought.hotThought?.balancedThought}/>
                             </Text>
-                                </Card>
-                            </View>
-                        )
-                    })
-                    }
-                </ScrollView>
-            </View>
+                        </Card>
+                    )
+                })
+                }
+                <View/>
+            </ScrollView>
         )
     }
 }
@@ -73,12 +72,12 @@ const styles = StyleSheet.create({
         borderColor: 'black'
     },
     container: {
-        flex: 1,
         alignItems: "center",
         backgroundColor: "#E5E5E5",
-        aspectRatio: 1.5,
-        height: 500
-    }
+    },
+    card: {
+        flex: 1
+    },
 })
 
 export default BalancedThoughtInfo;
