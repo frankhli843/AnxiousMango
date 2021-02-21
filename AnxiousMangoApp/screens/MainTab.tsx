@@ -11,17 +11,11 @@ import ModifyThoughtRecordsScreen
 import { useDispatch, useSelector } from 'react-redux'
 
 import commonStyles from "../common/CommonStyles";
-import {changeDashboardModeAction} from "../actions/thoughtRecordActions";
+import {changeDashboardModeAction, MainTabModes} from "../actions/thoughtRecordActions";
 import ThoughtRecordInfo
   from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ThoughtRecordInfo/ThoughtRecordInfo";
 import HotThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/HotThoughtInfo";
-export enum MainTabModes {
-  Dashboard ="CONST_DASHBOARD",
-  ModifyThoughtRecord = "CONST_THOUGHT_RECORD",
-  ThoughtRecordInfo = "CONST_THOUGHT_RECORD_INFO",
-  HotThoughtInfo = "CONST_HOT_THOUGHT_INFO",
-  BalancedThoughtInfo = "CONST_BALANCED_THOUGHT_INFO"
-}
+import BalancedThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/BalancedThoughtInfo";
 
 const styles = StyleSheet.create({
   container: {
@@ -102,6 +96,23 @@ export default function MainTab(this: any) {
             />
           </>
         }
+        {
+          currentMode === MainTabModes.BalancedThoughtInfo &&
+          <>
+            <BalancedThoughtInfo
+                thoughtRecords={dashboardData.thoughtRecords}
+                currentThoughtRecordID={currentThoughtRecordID}/>
+            <MainTabNavButton
+                setCurrentMode={() => MainTabModes.HotThoughtInfo}
+                title="Back to hot thought info"
+            />
+            <MainTabNavButton
+                setCurrentMode={() => MainTabModes.Dashboard}
+                title="Back to dashboard"
+            />
+          </>
+        }
+
 
         <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)"/>
       </View>
