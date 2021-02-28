@@ -1,6 +1,6 @@
 import {Card} from "react-native-elements";
 import * as React from "react";
-import {Button, StyleSheet, TextInput, View} from "react-native";
+import {Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 import {Text} from "../../../Themed";
 import {useDispatch, useSelector} from "react-redux";
@@ -28,6 +28,7 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
         return <AppLoading/>
     } else {
         return(
+            <ScrollView style={style.scroll}>
             <View>
                 <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 36, alignSelf: "center"}}>Hot Thought</Text>
                 { thoughtRecord.automaticThoughts.map(thought => {  // thoughts view component
@@ -50,6 +51,7 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
                         dispatch(changeDashboardModeAction(MainTabModes.BalancedThoughtInfo))}
                     title="Next"/>
             </View>
+            </ScrollView>
         )
     }
 
@@ -58,8 +60,12 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
 
 const style = StyleSheet.create({
     textInputStyle: {
+        width: '90%',
         borderWidth: 1,
         borderColor: 'black'
+    },
+    scroll: {
+        flex: 1
     }
 })
 

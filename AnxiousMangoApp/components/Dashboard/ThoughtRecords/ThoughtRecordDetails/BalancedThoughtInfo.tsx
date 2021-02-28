@@ -68,6 +68,7 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
 
 const styles = StyleSheet.create({
     textInputStyle: {
+        width: '90%',
         borderWidth: 1,
         borderColor: 'black'
     },
