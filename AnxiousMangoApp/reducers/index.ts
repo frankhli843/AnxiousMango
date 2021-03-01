@@ -11,10 +11,10 @@ function thoughtRecordData(state = {
     MainTabModes: "CONST_DASHBOARD"
 }, action: any){
     switch (action.type){
-        case "CONST_ADD_THOUGHT_RECORD": // user wants to add thought record
+        case "CONST_SET_CURRENT_THOUGHT_RECORD_ID": // user wants to add thought record
             return {
                 ...state,
-                thoughtRecords: [...state.thoughtRecords, action.thoughtRecord]
+                thoughtRecords: [...state.thoughtRecords, {}]
             }
         case "CONST_CURRENT_MODE": // change mode from Dashboard to Thought Record, i.e. user wants to view a thought rec.
             return {

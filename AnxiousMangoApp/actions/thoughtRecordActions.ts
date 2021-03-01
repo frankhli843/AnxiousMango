@@ -1,6 +1,5 @@
 import {HotThought, ThoughtRecord} from "../types/DashboardData";
 
-export const CONST_ADD_THOUGHT_RECORD = "CONST_ADD_THOUGHT_RECORD";
 export const CONST_CURRENT_MODE = "CONST_CURRENT_MODE"
 export const CONST_CHANGE_THOUGHT_RECORD_TITLE = "CONST_CHANGE_THOUGHT_RECORD_TITLE"
 export const CONST_CHANGE_THOUGHT_RECORD_SITUATION = "CONST_CHANGE_THOUGHT_RECORD_SITUATION"
@@ -9,6 +8,7 @@ export const CONST_ADD_SITUATION_ACTION = "CONST_ADD_SITUATION_ACTION"
 export const CONST_CHANGE_MOOD_ACTION = "CONST_CHANGE_MOOD_ACTION"
 export const CONST_CHANGE_AUTO_THOUGHT_ACTION = "CONST_CHANGE_AUTO_THOUGHT_ACTION"
 export const CONST_ADD_MOOD_ACTION = "CONST_ADD_MOOD_ACTION"
+export const CONST_SET_CURRENT_THOUGHT_RECORD_ID = "CONST_SET_CURRENT_THOUGHT_RECORD_ID"
 
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
@@ -24,10 +24,10 @@ export function changeDashboardModeAction(mode: MainTabModes) {
     }
 }
 
-export function addThoughtRecordAction(thoughtRecord: ThoughtRecord){
+export function setCurrentThoughtRecordID(id: number) {
     return {
-        type: CONST_ADD_THOUGHT_RECORD,
-        thoughtRecord: thoughtRecord
+        id,
+        type: CONST_SET_CURRENT_THOUGHT_RECORD_ID
     }
 }
 

@@ -1,8 +1,5 @@
 import * as React from "react";
 import {TextInput, StyleSheet} from "react-native";
-import {useDispatch, useSelector} from "react-redux"
-import {ThoughtRecord} from "../types/DashboardData";
-import {changeThoughtRecordTitleAction} from "../reducers";
 import {Text} from '../components/Themed'
 
 type modifyThoughtRecordScreenProps = {

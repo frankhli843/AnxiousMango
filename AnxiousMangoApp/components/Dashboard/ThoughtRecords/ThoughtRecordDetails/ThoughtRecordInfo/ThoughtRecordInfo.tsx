@@ -39,12 +39,6 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
             <View style={styles.container}>
                 <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 36, alignSelf: "center"}}>{thoughtRecord.title}</Text>
                 <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 24, alignSelf: "center"}}>{thoughtRecord.dateCreated}</Text>
-                <Button
-                    title={"Back to dashboard"}
-                    onPress={() => {
-                        dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
-                    }}
-                />
                 <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
                 <ReduxInput
                     label={"Title"}
@@ -135,11 +129,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                         />
                     )
                 })}
-                <Button
-                    onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThoughtInfo))}
-                    title="Next"
-                    color="#D39999"
-                />
+
             </View>
 
         )

@@ -46,10 +46,6 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
                         </Card>
                     )
                 })}
-                <Button
-                    onPress={() =>
-                        dispatch(changeDashboardModeAction(MainTabModes.BalancedThoughtInfo))}
-                    title="Next"/>
             </View>
             </ScrollView>
         )

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import {Button, StyleSheet} from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import Dashboard from "../components/Dashboard/Dashboard";
@@ -11,7 +11,7 @@ import ModifyThoughtRecordsScreen
 import { useDispatch, useSelector } from 'react-redux'
 
 import commonStyles from "../common/CommonStyles";
-import {changeDashboardModeAction, MainTabModes} from "../actions/thoughtRecordActions";
+import {changeDashboardModeAction, MainTabModes, setCurrentThoughtRecordID} from "../actions/thoughtRecordActions";
 import ThoughtRecordInfo
   from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ThoughtRecordInfo/ThoughtRecordInfo";
 import HotThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/HotThoughtInfo";
@@ -32,19 +32,37 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  navigationView:{
+    display:'flex',
+    flexDirection: "row",
+    justifyContent: 'space-evenly'
+  },
 });
 
 export default function MainTab(this: any) {
   // currentMode is string, setCurrentMode (stringInput) => void
   // use redux const [currentMode, setCurrentMode] = useState(MainTabModes.Dashboard);
-  const [currentThoughtRecordID, setCurrentThoughtRecordID] = useState(-1); // -1 means no thought record selected
-  // TODO use this data to show a thought record
+
   const dispatch = useDispatch();
   const dashboardData: DashboardData = dashboardDemoData;
-  const goToThoughtRecord = (currentThoughtRecordID: number) => {
-    dispatch(changeDashboardModeAction(MainTabModes.ModifyThoughtRecord)); // dispatch triggers state change
-    setCurrentThoughtRecordID(currentThoughtRecordID);  // make action redux
-  }
+
+  // TODO don't use this anymore. In our store keep a currentThoughtRecordID value
+  // const [currentThoughtRecordID, setCurrentThoughtRecordID] = useState(-1);
+  // const goToThoughtRecord = (currentThoughtRecordID: number) => {
+  //   dispatch(changeDashboardModeAction(MainTabModes.ModifyThoughtRecord)); // dispatch triggers state change
+  //   setCurrentThoughtRecordID(currentThoughtRecordID);  // make action redux
+  // }
+
+  // <ModifyThoughtRecordsScreen
+  //     currentThoughtRecordID={currentThoughtRecordID}  <=== remove this and in ModidfyThoughtRecords
+  // use redux to get currentThoughtRecordID
+  //     thoughtRecords={dashboardData.thoughtRecords}/>
+
+  // <Dashboard
+  //     thoughtRecords={dashboardData.thoughtRecords}
+  //     goToThoughtRecord={goToThoughtRecord.bind(this)}/>  <== replace with
+  //         (id) => {dispatch(setCurrentThoughtRecordID(id)}
+
 
   // get current mode using useSelector()
   const currentMode = useSelector(
@@ -55,38 +73,80 @@ export default function MainTab(this: any) {
         {
           currentMode === MainTabModes.Dashboard &&
           <>
-            <Dashboard thoughtRecords={dashboardData.thoughtRecords} goToThoughtRecord={goToThoughtRecord.bind(this)}/>
+            <Dashboard
+                thoughtRecords={dashboardData.thoughtRecords}
+                goToThoughtRecord={goToThoughtRecord.bind(this)}/>
             <MainTabNavButton
-                setCurrentMode={() => {
-                  setCurrentThoughtRecordID(-1); // sets current to none so we know its a new thought record
-                  // setCurrentMode(MainTabModes.ModifyThoughtRecord)
-                }}
                 title="Add Thought Record"
+                setCurrentMode={() => {
+                  dispatch(setCurrentThoughtRecordID(-1))
+                }}
             />
           </>
         }
         {
           currentMode === MainTabModes.ModifyThoughtRecord &&
           <>
+            <Button
+                title={"Back to dashboard"}
+                onPress={() => {
+                  dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                }}
+            />
             <ModifyThoughtRecordsScreen
                 currentThoughtRecordID={currentThoughtRecordID}
                 thoughtRecords={dashboardData.thoughtRecords}/>
+            <Button
+                onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThoughtInfo))}
+                title="Go to Hot Thoughts"
+                color="#D39999"
+            />
+
           </>
         }
         {
           currentMode === MainTabModes.HotThoughtInfo &&
           <>
+            <Button
+                title={"Back to dashboard"}
+                onPress={() => {
+                  dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                }}
+            />
            <HotThoughtInfo
                thoughtRecords={dashboardData.thoughtRecords}
                currentThoughtRecordID={currentThoughtRecordID}/>
+               <View style={styles.navigationView}>
+                <Button
+                    onPress={() => dispatch(changeDashboardModeAction(MainTabModes.ModifyThoughtRecord))}
+                    title="Back to Basic Info"
+                    color="#D39999"
+                />
+                <Button
+                    onPress={() => dispatch(changeDashboardModeAction(MainTabModes.BalancedThoughtInfo))}
+                    title="Go to Balanced Thoughts"
+                    color="#D39999"
+                />
+               </View>
           </>
         }
         {
           currentMode === MainTabModes.BalancedThoughtInfo &&
           <>
+            <Button
+                title={"Back to dashboard"}
+                onPress={() => {
+                  dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                }}
+            />
             <BalancedThoughtInfo
                 thoughtRecords={dashboardData.thoughtRecords}
                 currentThoughtRecordID={currentThoughtRecordID}/>
+            <Button
+                onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThoughtInfo))}
+                title="Back to Hot Thoughts"
+                color="#D39999"
+            />
           </>
         }
       </View>
