@@ -1,21 +1,19 @@
 import * as React from 'react';
 import {Button, StyleSheet} from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import {View} from '../components/Themed';
 import Dashboard from "../components/Dashboard/Dashboard";
-import {useState} from "react";
 import {DashboardData, dashboardDemoData} from "../types/DashboardData";
 import MainTabNavButton from "../components/Dashboard/ThoughtRecords/MainTabNavButton";
 import ModifyThoughtRecordsScreen
   from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ModifyThoughtRecordsScreen";
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import commonStyles from "../common/CommonStyles";
 import {changeDashboardModeAction, MainTabModes, setCurrentThoughtRecordID} from "../actions/thoughtRecordActions";
-import ThoughtRecordInfo
-  from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ThoughtRecordInfo/ThoughtRecordInfo";
 import HotThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/HotThoughtInfo";
 import BalancedThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/BalancedThoughtInfo";
+import {restoreSaved} from "../actions/restoreSavedData";
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +42,8 @@ export default function MainTab(this: any) {
   // use redux const [currentMode, setCurrentMode] = useState(MainTabModes.Dashboard);
 
   const dispatch = useDispatch();
-  const dashboardData: DashboardData = dashboardDemoData;
+  const dashboardData: DashboardData = dashboardDemoData
+  restoreSaved(dispatch);
 
   // TODO don't use this anymore. In our store keep a currentThoughtRecordID value
   // const [currentThoughtRecordID, setCurrentThoughtRecordID] = useState(-1);
@@ -62,7 +61,9 @@ export default function MainTab(this: any) {
   //     thoughtRecords={dashboardData.thoughtRecords}
   //     goToThoughtRecord={goToThoughtRecord.bind(this)}/>  <== replace with
   //         (id) => {dispatch(setCurrentThoughtRecordID(id)}
-
+  const currentThoughtRecordID = useSelector(
+      (state: {thoughtRecordData: DashboardData}) => state.thoughtRecordData.selectedThoughtRecordID
+  )
 
   // get current mode using useSelector()
   const currentMode = useSelector(
@@ -75,7 +76,12 @@ export default function MainTab(this: any) {
           <>
             <Dashboard
                 thoughtRecords={dashboardData.thoughtRecords}
-                goToThoughtRecord={goToThoughtRecord.bind(this)}/>
+                goToThoughtRecord={(id) => {
+                  dispatch(setCurrentThoughtRecordID(id));
+                  // change the mode to modify thought record
+                  dispatch(changeDashboardModeAction(MainTabModes.ModifyThoughtRecord))
+                }}/>
+
             <MainTabNavButton
                 title="Add Thought Record"
                 setCurrentMode={() => {

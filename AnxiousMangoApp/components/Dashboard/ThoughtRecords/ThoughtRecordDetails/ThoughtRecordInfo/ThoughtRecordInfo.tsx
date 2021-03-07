@@ -16,6 +16,7 @@ import {
     changeThoughtRecordTitleAction, MainTabModes,
     removeThoughtRecordSituationAction
 } from "../../../../../actions/thoughtRecordActions";
+import { Card } from "react-native-elements";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -37,6 +38,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
     } else {
         return (
             <View style={styles.container}>
+                <Card>
                 <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 36, alignSelf: "center"}}>{thoughtRecord.title}</Text>
                 <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 24, alignSelf: "center"}}>{thoughtRecord.dateCreated}</Text>
                 <Text>{`Date Created: ${thoughtRecord.dateCreated}`}</Text>
@@ -78,7 +80,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                 }}/>
 
                 {/*<Text>Situation: <TextInput style={style.textInputStyle} placeholder={"Add situation"}/></Text>*/}
-                <Text>Moods: </Text>
+                <Text style={{fontSize: 20}}>Moods </Text>
                 {
                     thoughtRecord.moods.map((mood, moodIndex) => {
                         return (
@@ -109,7 +111,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                         dispatch(addMoodAction(currentThoughtRecordID))}>
                 </Button>
 
-                <Text>Automatic Thoughts: </Text>
+                <Text style={{fontSize: 20}}>Automatic Thoughts </Text>
                 {thoughtRecord.automaticThoughts.map((autoThought, autoThoughtIndex) => {
                     return (
                         // <TextInput style={style.textInputStyle} placeholder={"Add automatic thought"}/>
@@ -129,7 +131,7 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                         />
                     )
                 })}
-
+                </Card>
             </View>
 
         )
@@ -138,8 +140,10 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
-        backgroundColor: "#E5E5E5",
+        backgroundColor: "#E5E5E5"
+    },
+    card: {
+        alignItems: "center"
     }
 })
 

@@ -1,20 +1,29 @@
 import {combineReducers} from "redux";
 import {dashboardDemoData} from "../types/DashboardData";
+import AsyncStorage from "@react-native-community/async-storage";
+import {CONST_RESTORE_SAVED, saveData} from "../actions/restoreSavedData";
 
 export default combineReducers({
     thoughtRecordData: thoughtRecordData,
 })
 
 
+
 function thoughtRecordData(state = {
     thoughtRecords: dashboardDemoData.thoughtRecords,
-    MainTabModes: "CONST_DASHBOARD"
+    MainTabModes: "CONST_DASHBOARD",
+    selectedThoughtRecordID: -1 // nothing is selected yet
 }, action: any){
+
+    saveData(state).then(r => {console.log('saved state')});
+
     switch (action.type){
-        case "CONST_SET_CURRENT_THOUGHT_RECORD_ID": // user wants to add thought record
+        case CONST_RESTORE_SAVED:
+            return action.state;
+        case "CONST_SET_CURRENT_THOUGHT_RECORD_ID":
             return {
                 ...state,
-                thoughtRecords: [...state.thoughtRecords, {}]
+                selectedThoughtRecordID: action.id
             }
         case "CONST_CURRENT_MODE": // change mode from Dashboard to Thought Record, i.e. user wants to view a thought rec.
             return {
@@ -79,9 +88,7 @@ function thoughtRecordData(state = {
                 }
             }
 
-            // why does this delete the other mood when you want to change one?
         case "CONST_CHANGE_MOOD_ACTION":
-
             return {
                 ...state,
                 thoughtRecords: {

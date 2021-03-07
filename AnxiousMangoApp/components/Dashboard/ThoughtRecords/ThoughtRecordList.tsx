@@ -7,7 +7,8 @@ import {AppLoading} from "expo";
 
 const tableViewStyles = {
     backgroundColor: '#D39999',
-    marginTop: 20
+    marginTop: 20,
+    flex: 1
 };
 
 type thoughtRecordProps = {

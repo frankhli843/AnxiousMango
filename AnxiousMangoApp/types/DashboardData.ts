@@ -1,8 +1,7 @@
-import {MainTabModes} from "../screens/MainTab";
-
 export type DashboardData = {
     thoughtRecords: ThoughtRecord[],
     MainTabModes?: string,
+    selectedThoughtRecordID: number
 }
 
 export type ThoughtRecord = {
@@ -32,6 +31,7 @@ export type HotThought = {
 }
 
 export const dashboardDemoData: DashboardData = {
+    selectedThoughtRecordID: -1,
     thoughtRecords: [
         {  // Bob is a compulsive shopper when he feels stressed. This causes conflict with his wife
             // b/c it puts them into debt
