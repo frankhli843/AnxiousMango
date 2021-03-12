@@ -4,7 +4,7 @@ import {Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 import {Text} from "../../../Themed";
 import {useDispatch, useSelector} from "react-redux";
-import {changeDashboardModeAction, MainTabModes} from "../../../../actions/thoughtRecordActions";
+import {addMoodAction, changeDashboardModeAction, MainTabModes} from "../../../../actions/thoughtRecordActions";
 import {useFonts} from "@expo-google-fonts/rubik";
 import {AppLoading} from "expo";
 import App from "../../../../App";
@@ -47,6 +47,11 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
                     )
                 })}
             </View>
+                <Button
+                    title={"Add"}
+                    onPress={() =>
+                        console.log("Add hot thought pressed")}>
+                </Button>
             </ScrollView>
         )
     }

@@ -1,7 +1,7 @@
 import {Text} from "../../../Themed";
 import {Card} from "react-native-elements";
 import * as React from "react";
-import {ScrollView, StyleSheet, TextInput, View} from "react-native";
+import {Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 import {useSelector} from "react-redux";
 import {useFonts} from "@expo-google-fonts/rubik";
@@ -60,6 +60,11 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
                     )
                 })
                 }
+                <Button
+                    title={"Add"}
+                    onPress={() =>
+                        console.log("Add balanced thought pressed")}>
+                </Button>
                 <View/>
             </ScrollView>
         )
