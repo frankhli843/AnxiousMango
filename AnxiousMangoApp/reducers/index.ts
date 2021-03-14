@@ -139,6 +139,38 @@ function thoughtRecordData(state = {
                     }
                 }
             }
+        case "CONST_ADD_EVIDENCE_FOR_HT":
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        automaticThoughts: [
+                            ...state.thoughtRecords[action.thoughtRecID].automaticThoughts,
+                            {
+                                // how exactly do i check if a description contains a hot thought?
+                            }
+                        ]
+                    }
+                }
+            }
+        case "CONST_ADD_EVIDENCE_AGAINST_HT":
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        automaticThoughts: [
+                            ...state.thoughtRecords[action.thoughtRecID].automaticThoughts,
+                            {
+                                // how exactly do i check if a description contains a hot thought?
+                            }
+                        ]
+                    }
+                }
+            }
         default:
             return state;
     }

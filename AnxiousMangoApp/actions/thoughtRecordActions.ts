@@ -9,6 +9,12 @@ export const CONST_CHANGE_MOOD_ACTION = "CONST_CHANGE_MOOD_ACTION"
 export const CONST_CHANGE_AUTO_THOUGHT_ACTION = "CONST_CHANGE_AUTO_THOUGHT_ACTION"
 export const CONST_ADD_MOOD_ACTION = "CONST_ADD_MOOD_ACTION"
 export const CONST_SET_CURRENT_THOUGHT_RECORD_ID = "CONST_SET_CURRENT_THOUGHT_RECORD_ID"
+export const CONST_ADD_EVIDENCE_FOR_HT = "CONST_ADD_EVIDENCE_FOR_HT"
+export const CONST_ADD_EVIDENCE_AGAINST_HT = "CONST_ADD_EVIDENCE_AGAINST_HT"
+export const CONST_ADD_BALANCED_THOUGHT = "CONST_ADD_BALANCED_THOUGHT"
+export const CONST_RM_EVIDENCE_FOR_HT = "CONST_RM_EVIDENCE_FOR_HT"
+export const CONST_RM_EVIDENCE_AGAINST_HT = "CONST_RM_EVIDENCE_FOR_HT"
+export const CONST_RM_BALANCED_THOUGHT = "CONST_RM_BALANCED_THOUGHT"
 
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
@@ -87,5 +93,26 @@ export function changeAutoThoughtAction(thoughtRecID: number, autoThoughtID: num
         description,
         hotThought,
         type: CONST_CHANGE_AUTO_THOUGHT_ACTION
+    }
+}
+
+export function addEvidenceForHTAction(thoughtRecID: number) {
+    return {
+        thoughtRecID,
+        type: CONST_ADD_SITUATION_ACTION
+    }
+}
+
+export function addEvidenceAgainstHTAction(thoughtRecID: number) {
+    return {
+        thoughtRecID,
+        type: CONST_ADD_SITUATION_ACTION
+    }
+}
+
+export function addBalancedThoughtAction(thoughtRecID: number) {
+    return {
+        thoughtRecID,
+        type: CONST_ADD_SITUATION_ACTION
     }
 }

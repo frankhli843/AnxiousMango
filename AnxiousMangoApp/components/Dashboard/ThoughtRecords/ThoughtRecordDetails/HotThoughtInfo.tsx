@@ -4,10 +4,16 @@ import {Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 import {Text} from "../../../Themed";
 import {useDispatch, useSelector} from "react-redux";
-import {addMoodAction, changeDashboardModeAction, MainTabModes} from "../../../../actions/thoughtRecordActions";
+import {
+    addMoodAction,
+    changeDashboardModeAction,
+    MainTabModes,
+    removeThoughtRecordSituationAction
+} from "../../../../actions/thoughtRecordActions";
 import {useFonts} from "@expo-google-fonts/rubik";
 import {AppLoading} from "expo";
 import App from "../../../../App";
+import ReduxInput from "../../../../common/ReduxInput";
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -38,20 +44,33 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
                                 <TextInput
                                     style={style.textInputStyle}
                                     placeholder={thought.hotThought && thought.hotThought.for.toString()}/>
+                                    <Button title={"X"} onPress={() => {
+                                        console.log("remove button pressed")
+                                    }}/>
                             </Text>
+                            <Button
+                                title={"Add"}
+                                onPress={() =>
+                                    console.log("Add hot thought pressed")}>
+                            </Button>
                             <Text>Evidence against Hot Thought:
                                 <TextInput
                                     style={style.textInputStyle}
-                                    placeholder={thought.hotThought && thought.hotThought.against.toString()}/></Text>
+                                    placeholder={thought.hotThought && thought.hotThought.against.toString()}/>
+                                <Button title={"X"} onPress={() => {
+                                    console.log("remove button pressed")
+                                }}/>
+                            </Text>
+                            <Button
+                                title={"Add"}
+                                onPress={() =>
+                                    console.log("Add hot thought pressed")}>
+                            </Button>
                         </Card>
                     )
                 })}
             </View>
-                <Button
-                    title={"Add"}
-                    onPress={() =>
-                        console.log("Add hot thought pressed")}>
-                </Button>
+
             </ScrollView>
         )
     }

@@ -43,28 +43,37 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
                                 <TextInput
                                     style={styles.textInputStyle}
                                     placeholder={hotThought.hotThought?.for.toString()}/>
+                                <Button title={"X"} onPress={() => {
+                                    console.log("remove button pressed")
+                                }}/>
                             </Text>
                             <Text>
                                 Evidence against:
                                 <TextInput
                                     style={styles.textInputStyle}
                                     placeholder={hotThought.hotThought?.against.toString()}/>
+                                <Button title={"X"} onPress={() => {
+                                    console.log("remove button pressed")
+                                }}/>
                             </Text>
                             <Text>
                                 Balanced thought:
                                 <TextInput
                                     style={styles.textInputStyle}
                                     placeholder={hotThought.hotThought?.balancedThought}/>
+                                <Button title={"X"} onPress={() => {
+                                    console.log("remove button pressed")
+                                }}/>
                             </Text>
+                            <Button
+                                title={"Add"}
+                                onPress={() =>
+                                    console.log("Add balanced thought pressed")}>
+                            </Button>
                         </Card>
                     )
                 })
                 }
-                <Button
-                    title={"Add"}
-                    onPress={() =>
-                        console.log("Add balanced thought pressed")}>
-                </Button>
                 <View/>
             </ScrollView>
         )
@@ -73,7 +82,7 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
 
 const styles = StyleSheet.create({
     textInputStyle: {
-        width: '90%',
+        width: '88%',
         borderWidth: 1,
         borderColor: 'black'
     },
