@@ -24,10 +24,9 @@ type AutomaticThought = {
 }
 
 export type HotThought = {
-    description: string,
     for: string[],
     against: string[],
-    balancedThought: string
+    balancedThought: string[]
 }
 
 export const dashboardDemoData: DashboardData = {
@@ -47,10 +46,9 @@ export const dashboardDemoData: DashboardData = {
                 {
                     description: "Things will never change.",
                     hotThought: {
-                        description: '',
                         for: ["my friends don't call me back", "I lost my job", "We will never go back to pre-COVID times"],
                         against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"],
-                        balancedThought: ""
+                        balancedThought: ["There will be better days ahead", "Biden is now president", "there are more covid vaccines"]
                     }
                 },
                 {
@@ -79,10 +77,9 @@ export const dashboardDemoData: DashboardData = {
                 {
                     description: "Things will never change.",
                     hotThought: {
-                        description: '',
                         for: ["my friends don't call me back", "I lost my job", "We will never go back to pre-COVID times"],
                         against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"],
-                        balancedThought: ""
+                        balancedThought: ["There will be better days ahead", "Biden is now president", "there are more covid vaccines"]
                     }
                 },
                 {

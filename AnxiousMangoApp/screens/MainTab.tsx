@@ -148,11 +148,18 @@ export default function MainTab(this: any) {
             <BalancedThoughtInfo
                 thoughtRecords={dashboardData.thoughtRecords}
                 currentThoughtRecordID={currentThoughtRecordID}/>
+            <View style={styles.navigationView}>
+            <Button
+                onPress={() => dispatch(changeDashboardModeAction(MainTabModes.ModifyThoughtRecord))}
+                title="Back to Basic Info"
+                color="#D39999"
+            />
             <Button
                 onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThoughtInfo))}
                 title="Back to Hot Thoughts"
                 color="#D39999"
             />
+            </View>
           </>
         }
       </View>

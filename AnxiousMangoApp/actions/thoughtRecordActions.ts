@@ -5,9 +5,12 @@ export const CONST_CHANGE_THOUGHT_RECORD_TITLE = "CONST_CHANGE_THOUGHT_RECORD_TI
 export const CONST_CHANGE_THOUGHT_RECORD_SITUATION = "CONST_CHANGE_THOUGHT_RECORD_SITUATION"
 export const CONST_REMOVE_SITUATION_ACTION = "CONST_REMOVE_SITUATION_ACTION"
 export const CONST_ADD_SITUATION_ACTION = "CONST_ADD_SITUATION_ACTION"
-export const CONST_CHANGE_MOOD_ACTION = "CONST_CHANGE_MOOD_ACTION"
-export const CONST_CHANGE_AUTO_THOUGHT_ACTION = "CONST_CHANGE_AUTO_THOUGHT_ACTION"
 export const CONST_ADD_MOOD_ACTION = "CONST_ADD_MOOD_ACTION"
+export const CONST_CHANGE_MOOD_ACTION = "CONST_CHANGE_MOOD_ACTION"
+export const CONST_REMOVE_MOOD_ACTION = "CONST_REMOVE_MOOD_ACTION"
+export const CONST_CHANGE_AUTO_THOUGHT_ACTION = "CONST_CHANGE_AUTO_THOUGHT_ACTION"
+export const CONST_ADD_AUTO_THOUGHT_ACTION = "CONST_ADD_AUTO_THOUGHT_ACTION"
+export const CONST_REMOVE_AUTO_THOUGHT_ACTION = "CONST_REMOVE_AUTO_THOUGHT_ACTION"
 export const CONST_SET_CURRENT_THOUGHT_RECORD_ID = "CONST_SET_CURRENT_THOUGHT_RECORD_ID"
 export const CONST_ADD_EVIDENCE_FOR_HT = "CONST_ADD_EVIDENCE_FOR_HT"
 export const CONST_ADD_EVIDENCE_AGAINST_HT = "CONST_ADD_EVIDENCE_AGAINST_HT"
@@ -86,6 +89,14 @@ export function addMoodAction(thoughtRecID: number) {
     }
 }
 
+export function removeMoodAction(thoughtRecID: number, moodID: number) {
+    return {
+        thoughtRecID,
+        moodID,
+        type: CONST_REMOVE_MOOD_ACTION
+    }
+}
+
 export function changeAutoThoughtAction(thoughtRecID: number, autoThoughtID: number, description: string, hotThought?: HotThought) {
     return {
         thoughtRecID,
@@ -93,6 +104,23 @@ export function changeAutoThoughtAction(thoughtRecID: number, autoThoughtID: num
         description,
         hotThought,
         type: CONST_CHANGE_AUTO_THOUGHT_ACTION
+    }
+}
+
+
+export function addAutoThoughtAction(thoughtRecID: number) {
+    return {
+        thoughtRecID,
+        type: CONST_ADD_AUTO_THOUGHT_ACTION
+    }
+}
+
+
+export function removeAutoThoughtAction(thoughtRecID: number, autoThoughtID: number) {
+    return {
+        thoughtRecID,
+        autoThoughtID,
+        type: CONST_REMOVE_AUTO_THOUGHT_ACTION
     }
 }
 

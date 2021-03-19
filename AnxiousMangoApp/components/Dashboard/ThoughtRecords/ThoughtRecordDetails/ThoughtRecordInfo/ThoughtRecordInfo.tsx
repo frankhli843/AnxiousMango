@@ -7,13 +7,14 @@ import ReduxInput from "../../../../../common/ReduxInput";
 import {useFonts} from "@expo-google-fonts/rubik";
 import {AppLoading} from "expo";
 import {
+    addAutoThoughtAction,
     addMoodAction,
     addThoughtRecordSituationAction,
     changeAutoThoughtAction,
     changeDashboardModeAction,
     changeMoodAction,
     changeThoughtRecordSituationAction,
-    changeThoughtRecordTitleAction, MainTabModes,
+    changeThoughtRecordTitleAction, MainTabModes, removeAutoThoughtAction, removeMoodAction,
     removeThoughtRecordSituationAction
 } from "../../../../../actions/thoughtRecordActions";
 import { Card } from "react-native-elements";
@@ -79,13 +80,10 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                     dispatch(addThoughtRecordSituationAction(currentThoughtRecordID))
                 }}/>
 
-                {/*<Text>Situation: <TextInput style={style.textInputStyle} placeholder={"Add situation"}/></Text>*/}
                 <Text style={{fontSize: 20}}>Moods </Text>
                 {
                     thoughtRecord.moods.map((mood, moodIndex) => {
                         return (
-                            // <Text>Description: <TextInput style={style.textInputStyle} placeholder={"Add a description"}/></Text>
-                            // <Text>Percentage: <TextInput style={style.textInputStyle} placeholder={"Add mood percentage here"}/> </Text>
                             <ReduxInput
                                 // separates diff't elements so when something is deleted, react knows which is which
                                 key={`Mood-input-${currentThoughtRecordID}-${moodIndex}`}
@@ -100,6 +98,12 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                                         mood.percentage
                                     ))
                                 }}
+                                // @ts-ignore
+                                removeButton={
+                                    <Button title={"X"} onPress={() => {
+                                        dispatch(removeMoodAction(currentThoughtRecordID, moodIndex))
+                                    }}/>
+                                }
                             />
                         )
                     }
@@ -114,7 +118,6 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                 <Text style={{fontSize: 20}}>Automatic Thoughts </Text>
                 {thoughtRecord.automaticThoughts.map((autoThought, autoThoughtIndex) => {
                     return (
-                        // <TextInput style={style.textInputStyle} placeholder={"Add automatic thought"}/>
                         <ReduxInput
                             key={`Auto-thought-${currentThoughtRecordID}-${autoThoughtIndex}`}
                             label={"Automatic Thought"}
@@ -128,9 +131,20 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
                                 autoThought.hotThought
                                 ))
                             }}
+                            // @ts-ignore
+                            removeButton={
+                                <Button title={"X"} onPress={() => {
+                                    dispatch(removeAutoThoughtAction(currentThoughtRecordID, autoThoughtIndex))
+                                }}/>
+                            }
                         />
                     )
                 })}
+                    <Button
+                        title={"Add"}
+                        onPress={() =>
+                            dispatch(addAutoThoughtAction(currentThoughtRecordID))}>
+                    </Button>
                 </Card>
             </View>
 

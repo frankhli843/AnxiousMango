@@ -29,14 +29,14 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
                 <View style={styles.container}/>
                 <Text style={{fontFamily: 'Rubik_400Regular', fontSize: 36, alignSelf: "center"}}>Balanced
                     Thoughts</Text>
-                {thoughtRecord.automaticThoughts.map(hotThought => {
+                {thoughtRecord.automaticThoughts.map((hotThought, i) => {
                     return (
                         <Card>
                             <Text>
                                 Hot Thought:
                                 <TextInput
                                     style={styles.textInputStyle}
-                                    placeholder={hotThought.hotThought?.description}/>
+                                    placeholder={thoughtRecord.automaticThoughts[i].description}/>
                             </Text>
                             <Text>
                                 Evidence for:
@@ -60,7 +60,7 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
                                 Balanced thought:
                                 <TextInput
                                     style={styles.textInputStyle}
-                                    placeholder={hotThought.hotThought?.balancedThought}/>
+                                    placeholder={hotThought.hotThought?.balancedThought.toString()}/>
                                 <Button title={"X"} onPress={() => {
                                     console.log("remove button pressed")
                                 }}/>
@@ -94,5 +94,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
 })
+
+
 
 export default BalancedThoughtInfo;

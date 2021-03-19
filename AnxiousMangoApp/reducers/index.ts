@@ -120,6 +120,18 @@ function thoughtRecordData(state = {
                     }
                 }
             }
+        case "CONST_REMOVE_MOOD_ACTION":
+            const moodArray = state.thoughtRecords[action.thoughtRecID].moods
+                .filter((mood, index) => {return index != action.moodID})
+            return {
+                ...state,
+                thoughtRecords: {
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        moods: moodArray
+                    }
+                }
+            }
         case "CONST_CHANGE_AUTO_THOUGHT_ACTION":
             return {
                 ...state,
@@ -136,6 +148,36 @@ function thoughtRecordData(state = {
                                 (t, index) => {return index > action.autoThoughtID}
                                 )
                         ]
+                    }
+                }
+            }
+        case "CONST_ADD_AUTO_THOUGHT_ACTION":
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        moods: [
+                            ...state.thoughtRecords[action.thoughtRecID].moods
+                        ],
+                        automaticThoughts: [
+                            ...state.thoughtRecords[action.thoughtRecID].automaticThoughts,
+                            ""
+                        ]
+                    }
+                }
+            }
+        case "CONST_REMOVE_AUTO_THOUGHT_ACTION":
+            const autoThoughtArray = state.thoughtRecords[action.thoughtRecID].automaticThoughts
+                .filter((t, index) => {return index != action.autoThoughtID})
+            return {
+                ...state,
+                thoughtRecords: {
+                    ...state.thoughtRecords,
+                    [action.thoughtRecID]: {
+                        ...state.thoughtRecords[action.thoughtRecID],
+                        automaticThoughts: autoThoughtArray
                     }
                 }
             }
