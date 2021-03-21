@@ -14,6 +14,7 @@ import {changeDashboardModeAction, MainTabModes, setCurrentThoughtRecordID} from
 import HotThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/HotThoughtInfo";
 import BalancedThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/BalancedThoughtInfo";
 import {restoreSaved} from "../actions/restoreSavedData";
+import WhatHappened from "../components/Dashboard/HadBadExperience/WhatHappened";
 
 const styles = StyleSheet.create({
   container: {
@@ -86,6 +87,13 @@ export default function MainTab(this: any) {
                 title="Add Thought Record"
                 setCurrentMode={() => {
                   dispatch(setCurrentThoughtRecordID(-1))
+
+                }}
+            />
+            <MainTabNavButton
+                title="I just had a bad experience"
+                setCurrentMode={() => {
+                  dispatch(changeDashboardModeAction(MainTabModes.WhatHappened));
                 }}
             />
           </>
@@ -161,6 +169,17 @@ export default function MainTab(this: any) {
             />
             </View>
           </>
+        }
+        {
+          currentMode === MainTabModes.WhatHappened &&
+              <>
+                <WhatHappened />
+                <Button
+                    onPress={() => dispatch(changeDashboardModeAction(MainTabModes.Feelings))}
+                    title="Next"
+                    color="#D39999"
+                />
+              </>
         }
       </View>
   );

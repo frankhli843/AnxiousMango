@@ -23,7 +23,9 @@ export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
     ModifyThoughtRecord = "CONST_THOUGHT_RECORD",
     HotThoughtInfo = "CONST_HOT_THOUGHT_INFO",
-    BalancedThoughtInfo = "CONST_BALANCED_THOUGHT_INFO"
+    BalancedThoughtInfo = "CONST_BALANCED_THOUGHT_INFO",
+    WhatHappened = "CONST_WHAT_HAPPENED",
+    Feelings = "CONST_FEELINGS"
 }
 
 export function changeDashboardModeAction(mode: MainTabModes) {
