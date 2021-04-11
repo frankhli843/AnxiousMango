@@ -12,7 +12,8 @@ export default combineReducers({
 function thoughtRecordData(state = {
     thoughtRecords: dashboardDemoData.thoughtRecords,
     MainTabModes: "CONST_DASHBOARD",
-    selectedThoughtRecordID: -1 // nothing is selected yet
+    selectedThoughtRecordID: -1, // nothing is selected yetm
+    pendingThoughtRecord: {},
 }, action: any){
 
     saveData(state).then(r => {console.log('saved state')});
@@ -20,6 +21,28 @@ function thoughtRecordData(state = {
     switch (action.type){
         case CONST_RESTORE_SAVED:
             return action.state;
+        case "CONST_MAKE_PENDING_THOUGHT_RECORD":
+            const now = new Date();
+            return {
+                ...state,
+                pendingThoughtRecord: {
+                    dateCreated: now.toString(),
+                    dateModified: now.toString(),
+                    title: now.toLocaleString('en-US'),
+                    situation: [],
+                    moods: [],
+                    automaticThoughts: []
+                }
+            }
+        case "CONST_PTR_CHANGE_SITUATION":
+            return {
+                ...state,
+                pendingThoughtRecord: {
+                    ...state.pendingThoughtRecord,
+                    situationArray: [action.situation]
+                }
+            }
+
         case "CONST_SET_CURRENT_THOUGHT_RECORD_ID":
             return {
                 ...state,

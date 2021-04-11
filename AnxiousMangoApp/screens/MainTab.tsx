@@ -15,6 +15,10 @@ import HotThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecord
 import BalancedThoughtInfo from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/BalancedThoughtInfo";
 import {restoreSaved} from "../actions/restoreSavedData";
 import WhatHappened from "../components/Dashboard/HadBadExperience/WhatHappened";
+import Feelings from "../components/Dashboard/HadBadExperience/Feelings";
+import AutoThoughts from "../components/Dashboard/HadBadExperience/AutoThoughts";
+import HotThought from "../components/Dashboard/HadBadExperience/HotThought";
+import BalancedThought from "../components/Dashboard/HadBadExperience/BalancedThought";
 
 const styles = StyleSheet.create({
   container: {
@@ -34,7 +38,8 @@ const styles = StyleSheet.create({
   navigationView:{
     display:'flex',
     flexDirection: "row",
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    backgroundColor: "#E5E5E5"
   },
 });
 
@@ -174,11 +179,80 @@ export default function MainTab(this: any) {
           currentMode === MainTabModes.WhatHappened &&
               <>
                 <WhatHappened />
-                <Button
-                    onPress={() => dispatch(changeDashboardModeAction(MainTabModes.Feelings))}
-                    title="Next"
-                    color="#D39999"
-                />
+                <View style={styles.navigationView}>
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.Feelings))}
+                      title="Next"
+                      color="#D39999"
+                  />
+                </View>
+              </>
+        }
+        {
+          currentMode == MainTabModes.Feelings &&
+              <>
+                <Feelings />
+                <View style={styles.navigationView}>
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.WhatHappened))}
+                      title="Back"
+                      color="#D39999"
+                  />
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.AutoThoughts))}
+                      title="Next"
+                      color="#D39999"
+                  />
+                </View>
+              </>
+        }
+        {
+          currentMode == MainTabModes.AutoThoughts &&
+              <>
+                <AutoThoughts/>
+                <View style={styles.navigationView}>
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.Feelings))}
+                      title="Back"
+                      color="#D39999"
+                  />
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThought))}
+                      title="Next"
+                      color="#D39999"
+                  />
+                </View>
+              </>
+        }
+        {
+          currentMode == MainTabModes.HotThought &&
+              <>
+                <HotThought/>
+                <View style={styles.navigationView}>
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.Feelings))}
+                      title="Back"
+                      color="#D39999"
+                  />
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.BalancedThought))}
+                      title="Next"
+                      color="#D39999"
+                  />
+                </View>
+              </>
+        }
+        {
+          currentMode == MainTabModes.BalancedThought &&
+              <>
+                <BalancedThought/>
+                <View style={styles.navigationView}>
+                  <Button
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThought))}
+                      title="Back"
+                      color="#D39999"
+                  />
+                </View>
               </>
         }
       </View>

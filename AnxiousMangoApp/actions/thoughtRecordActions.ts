@@ -18,16 +18,32 @@ export const CONST_ADD_BALANCED_THOUGHT = "CONST_ADD_BALANCED_THOUGHT"
 export const CONST_RM_EVIDENCE_FOR_HT = "CONST_RM_EVIDENCE_FOR_HT"
 export const CONST_RM_EVIDENCE_AGAINST_HT = "CONST_RM_EVIDENCE_FOR_HT"
 export const CONST_RM_BALANCED_THOUGHT = "CONST_RM_BALANCED_THOUGHT"
-
+export const CONST_MAKE_PENDING_THOUGHT_RECORD = "CONST_MAKE_PENDING_THOUGHT_RECORD";
+export const CONST_PTR_CHANGE_SITUATION = "CONST_PTR_CHANGE_SITUATION";
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
     ModifyThoughtRecord = "CONST_THOUGHT_RECORD",
     HotThoughtInfo = "CONST_HOT_THOUGHT_INFO",
     BalancedThoughtInfo = "CONST_BALANCED_THOUGHT_INFO",
     WhatHappened = "CONST_WHAT_HAPPENED",
-    Feelings = "CONST_FEELINGS"
+    Feelings = "CONST_FEELINGS",
+    AutoThoughts = "CONST_AUTO_THOUGHTS",
+    HotThought = "CONST_HOT_THOUGHTS",
+    BalancedThought = "CONST_BALANCED_THOUGHT"
 }
 
+export function makePendingThoughtRecord(){
+    return {
+        type: CONST_MAKE_PENDING_THOUGHT_RECORD
+    }
+}
+
+export function ptrChangeSituation(situation: string){
+    return {
+        type: CONST_PTR_CHANGE_SITUATION,
+        situation
+    }
+}
 export function changeDashboardModeAction(mode: MainTabModes) {
     return {
         type: CONST_CURRENT_MODE,

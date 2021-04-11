@@ -7,11 +7,12 @@ const styles = StyleSheet.create({
     textInput: {display: 'flex', minHeight: 50, backgroundColor: 'white', marginBottom: 10}
 })
 
-
-
 const BalancedThought = () => {
     return(
         <View style={styles.balancedThoughtView}>
+            <Image
+                style={styles.mainImage}
+                source={require('../../../../images/balancedthought.jpg')}/>
             <div>Let's find a more balanced thought.</div>
             <View style={{flex: 1}}>
                 <TextInput

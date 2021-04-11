@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
 const AutoThoughts = () => {
     return(
         <View style={styles.autoThoughtsView}>
+            <Image
+                style={styles.mainImage}
+                source={require('../../../../images/auto.png')}/>
             <div>What automatic thoughts did you have?</div>
             <View style={{flex: 1}}>
                 <TextInput

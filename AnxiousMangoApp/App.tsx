@@ -6,11 +6,12 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 // @ts-ignore
-import {Provider} from 'react-redux';
+import {Provider, useDispatch} from 'react-redux';
 import {createStore} from 'redux';
 import middleware from './middleware'
 // @ts-ignore
 import reducer from './reducers'
+import {restoreSaved} from "./actions/restoreSavedData";
 
 const store = createStore(reducer, middleware)
 

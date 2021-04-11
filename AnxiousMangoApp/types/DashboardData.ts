@@ -1,7 +1,8 @@
 export type DashboardData = {
     thoughtRecords: ThoughtRecord[],
     MainTabModes?: string,
-    selectedThoughtRecordID: number
+    selectedThoughtRecordID: number,
+    pendingThoughtRecord: ThoughtRecord | {}
 }
 
 export type ThoughtRecord = {
