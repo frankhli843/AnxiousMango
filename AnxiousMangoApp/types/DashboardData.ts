@@ -2,7 +2,7 @@ export type DashboardData = {
     thoughtRecords: ThoughtRecord[],
     MainTabModes?: string,
     selectedThoughtRecordID: number,
-    pendingThoughtRecord: ThoughtRecord | {}
+    pendingThoughtRecord?: ThoughtRecord
 }
 
 export type ThoughtRecord = {
