@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {Image, StyleSheet, TextInput, View} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
+import {DashboardData} from "../../../types/DashboardData";
+import {makePendingThoughtRecord, ptrChangeMood} from "../../../actions/thoughtRecordActions";
 
 const styles = StyleSheet.create({
     feelingsView: { display: 'flex', alignItems: 'center'},
@@ -10,6 +13,12 @@ const styles = StyleSheet.create({
 
 
 const Feelings = () => {
+    const dispatch = useDispatch();
+    // check if pending is empty, if it is make a new thought record
+    const pendingThoughtRecord = useSelector((state:DashboardData ) => state.pendingThoughtRecord);
+    if (!pendingThoughtRecord || Object.keys(pendingThoughtRecord).length === 0){
+        dispatch(makePendingThoughtRecord());
+    }
     return(
         <View style={styles.feelingsView}>
             <Image
@@ -18,8 +27,12 @@ const Feelings = () => {
             <div>How did you feel?</div>
             <View style={{flex: 1}}>
                 <TextInput
+                    value={pendingThoughtRecord && pendingThoughtRecord.moods.join(", ")}
                     style={styles.textInput}
                     multiline={true}
+                    onChangeText={(mood) => {
+                        dispatch(ptrChangeMood(mood))
+                    }}
                 />
             </View>
         </View>

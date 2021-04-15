@@ -20,6 +20,8 @@ export const CONST_RM_EVIDENCE_AGAINST_HT = "CONST_RM_EVIDENCE_FOR_HT"
 export const CONST_RM_BALANCED_THOUGHT = "CONST_RM_BALANCED_THOUGHT"
 export const CONST_MAKE_PENDING_THOUGHT_RECORD = "CONST_MAKE_PENDING_THOUGHT_RECORD";
 export const CONST_PTR_CHANGE_SITUATION = "CONST_PTR_CHANGE_SITUATION";
+export const CONST_PTR_CHANGE_MOOD = "CONST_PTR_CHANGE_MOOD";
+
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
     ModifyThoughtRecord = "CONST_THOUGHT_RECORD",
@@ -44,6 +46,14 @@ export function ptrChangeSituation(situation: string){
         situation
     }
 }
+
+export function ptrChangeMood(mood: string){
+    return {
+        type: CONST_PTR_CHANGE_SITUATION,
+        mood
+    }
+}
+
 export function changeDashboardModeAction(mode: MainTabModes) {
     return {
         type: CONST_CURRENT_MODE,
