@@ -48,7 +48,15 @@ function thoughtRecordData(state = {
                 ...state,
                 pendingThoughtRecord: {
                     ...state.pendingThoughtRecord,
-                    moods: [action.moods]
+                    moods: [action.mood]
+                }
+            }
+        case "CONST_PTR_CHANGE_AUTOTHOUGHT":
+            return {
+                ...state,
+                pendingThoughtRecord: {
+                    ...state.pendingThoughtRecord,
+                    automaticThoughts: [...action.autoThought]
                 }
             }
 

@@ -230,7 +230,7 @@ export default function MainTab(this: any) {
                 <HotThought/>
                 <View style={styles.navigationView}>
                   <Button
-                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.Feelings))}
+                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.AutoThoughts))}
                       title="Back"
                       color="#D39999"
                   />

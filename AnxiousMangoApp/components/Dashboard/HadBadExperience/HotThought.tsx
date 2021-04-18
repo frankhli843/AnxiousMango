@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {Image, StyleSheet, TextInput, View} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
+import {DashboardData, ThoughtRecord} from "../../../types/DashboardData";
+import {makePendingThoughtRecord} from "../../../actions/thoughtRecordActions";
 
 const styles = StyleSheet.create({
     hotThoughtView: {
@@ -20,16 +23,13 @@ const styles = StyleSheet.create({
     }
 })
 
-const hotThoughtList = [
-    {
-        label: 'data 1'
-    },
-    {
-        label: 'data 2'
-    }
-];
-
 const HotThought = () => {
+    const dispatch = useDispatch();
+    // check if pending is empty, if it is make a new thought record
+    const pendingThoughtRecord = useSelector((state: {thoughtRecordData: {pendingThoughtRecord: ThoughtRecord}}) =>
+        state.thoughtRecordData.pendingThoughtRecord
+    );
+
     return(
         <View style={styles.hotThoughtView}>
             <Image
@@ -37,10 +37,15 @@ const HotThought = () => {
                 source={require('../../../../images/hotthought.jpg')}/>
             <div>Which one of these thoughts bother you the most?</div>
             <View style={{flex: 1}}>
-                <TextInput
-                    style={styles.textInput}
-                    multiline={true}
-                />
+                {/*<TextInput*/}
+                {/*    style={styles.textInput}*/}
+                {/*    multiline={true}*/}
+                {/*/>*/}
+                <div>
+                    {
+                        pendingThoughtRecord.automaticThoughts.map((thought) => `${thought} `)
+                    }
+                </div>
             </View>
         </View>
 
