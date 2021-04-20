@@ -44,12 +44,16 @@ const AutoThoughts = () => {
                 />
             </View>
             <div>
-            { pendingThoughtRecord && pendingThoughtRecord.automaticThoughts
-                .map((thought, i) => `${i+1}. ${thought} `)
-            }
+                {pendingThoughtRecord && pendingThoughtRecord.automaticThoughts
+                    .map((thought, i) => {
+                            return (
+                                <View>{i + 1}. {thought}</View>
+                            )
+                        }
+                    )
+                }
             </div>
         </View>
-
     );
 
 }

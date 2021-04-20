@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {Image, StyleSheet, TextInput, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import {DashboardData, ThoughtRecord} from "../../../types/DashboardData";
-import {makePendingThoughtRecord} from "../../../actions/thoughtRecordActions";
+import {ThoughtRecord} from "../../../types/DashboardData";
 
 const styles = StyleSheet.create({
     hotThoughtView: {
@@ -36,6 +35,7 @@ const HotThought = () => {
                 style={styles.mainImage}
                 source={require('../../../../images/hotthought.jpg')}/>
             <div>Which one of these thoughts bother you the most?</div>
+            <br/>
             <View style={{flex: 1}}>
                 {/*<TextInput*/}
                 {/*    style={styles.textInput}*/}
@@ -43,12 +43,15 @@ const HotThought = () => {
                 {/*/>*/}
                 <div>
                     {
-                        pendingThoughtRecord.automaticThoughts.map((thought) => `${thought} `)
+                        pendingThoughtRecord.automaticThoughts.map((thought) => {
+                            return(
+                                <div>{thought}</div>
+                            )
+                        })
                     }
                 </div>
             </View>
         </View>
-
     );
 
 }
