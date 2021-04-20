@@ -37,10 +37,6 @@ const HotThought = () => {
             <div>Which one of these thoughts bother you the most?</div>
             <br/>
             <View style={{flex: 1}}>
-                {/*<TextInput*/}
-                {/*    style={styles.textInput}*/}
-                {/*    multiline={true}*/}
-                {/*/>*/}
                 <div>
                     {
                         pendingThoughtRecord.automaticThoughts.map((thought) => {

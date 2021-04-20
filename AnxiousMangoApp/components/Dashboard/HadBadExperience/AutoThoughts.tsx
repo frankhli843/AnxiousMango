@@ -2,8 +2,7 @@ import * as React from 'react';
 import {Image, StyleSheet, TextInput, View} from "react-native";
 import {makePendingThoughtRecord, ptrChangeAutoThought, ptrChangeMood} from "../../../actions/thoughtRecordActions";
 import {useDispatch, useSelector} from "react-redux";
-import {DashboardData, ThoughtRecord} from "../../../types/DashboardData";
-import {useState} from "react";
+import {ThoughtRecord} from "../../../types/DashboardData";
 
 const styles = StyleSheet.create({
     autoThoughtsView: { display: 'flex', alignItems: 'center'},
@@ -47,7 +46,7 @@ const AutoThoughts = () => {
                 {pendingThoughtRecord && pendingThoughtRecord.automaticThoughts
                     .map((thought, i) => {
                             return (
-                                <View>{i + 1}. {thought}</View>
+                                <div>{i + 1}. {thought}</div>
                             )
                         }
                     )
