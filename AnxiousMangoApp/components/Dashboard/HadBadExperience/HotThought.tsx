@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {Image, StyleSheet, TextInput, View} from "react-native";
+import {Image, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {ThoughtRecord} from "../../../types/DashboardData";
+import MangoSelection from "../../../common/MangoSelection";
 
 const styles = StyleSheet.create({
     hotThoughtView: {
@@ -19,7 +20,10 @@ const styles = StyleSheet.create({
         minHeight: 50,
         backgroundColor: 'white',
         marginBottom: 10
-    }
+    },
+    card: {
+        flex: 1
+    },
 })
 
 const HotThought = () => {
@@ -30,24 +34,18 @@ const HotThought = () => {
     );
 
     return(
+        <ScrollView style={styles.card}>
         <View style={styles.hotThoughtView}>
             <Image
                 style={styles.mainImage}
                 source={require('../../../../images/hotthought.jpg')}/>
             <div>Which one of these thoughts bother you the most?</div>
             <br/>
-            <View style={{flex: 1}}>
-                <div>
-                    {
-                        pendingThoughtRecord.automaticThoughts.map((thought) => {
-                            return(
-                                <div>{thought}</div>
-                            )
-                        })
-                    }
-                </div>
-            </View>
+            <MangoSelection
+                style={{flex: 1}}
+                selectionList={pendingThoughtRecord.automaticThoughts.map(a => a.description)}/>
         </View>
+        </ScrollView>
     );
 
 }

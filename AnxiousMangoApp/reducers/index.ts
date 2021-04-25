@@ -52,11 +52,13 @@ function thoughtRecordData(state = {
                 }
             }
         case "CONST_PTR_CHANGE_AUTOTHOUGHT":
+            const convertedToAutoThought = action.autoThoughts
+                .map((t: string) => { return {description: t}});
             return {
                 ...state,
                 pendingThoughtRecord: {
                     ...state.pendingThoughtRecord,
-                    automaticThoughts: [...action.autoThought]
+                    automaticThoughts: convertedToAutoThought
                 }
             }
 

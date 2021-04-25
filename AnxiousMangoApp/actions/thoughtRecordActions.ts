@@ -55,10 +55,10 @@ export function ptrChangeMood(mood: string){
     }
 }
 
-export function ptrChangeAutoThought(autoThought: string) {
+export function ptrChangeAutoThought(autoThoughts: string[]) {
     return {
         type: CONST_PTR_CHANGE_AUTOTHOUGHT,
-        autoThought
+        autoThoughts
     }
 }
 
