@@ -1,4 +1,5 @@
 import {HotThought, ThoughtRecord} from "../types/DashboardData";
+import {id} from "../utilities/id";
 
 export const CONST_CURRENT_MODE = "CONST_CURRENT_MODE"
 export const CONST_CHANGE_THOUGHT_RECORD_TITLE = "CONST_CHANGE_THOUGHT_RECORD_TITLE"
@@ -22,6 +23,7 @@ export const CONST_MAKE_PENDING_THOUGHT_RECORD = "CONST_MAKE_PENDING_THOUGHT_REC
 export const CONST_PTR_CHANGE_SITUATION = "CONST_PTR_CHANGE_SITUATION";
 export const CONST_PTR_CHANGE_MOOD = "CONST_PTR_CHANGE_MOOD";
 export const CONST_PTR_CHANGE_AUTOTHOUGHT = "CONST_PTR_CHANGE_AUTOTHOUGHT";
+export const CONST_PTR_SET_HOTTHOUGHT = "CONST_PTR_SET_HOTTHOUGHT";
 
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
@@ -58,7 +60,16 @@ export function ptrChangeMood(mood: string){
 export function ptrChangeAutoThought(autoThoughts: string[]) {
     return {
         type: CONST_PTR_CHANGE_AUTOTHOUGHT,
-        autoThoughts
+        autoThoughts: autoThoughts.map(thought => {
+            return { description: thought,  id: id() }
+        })
+    }
+}
+
+export function ptrSetHotThought(thoughtRecID: string) {
+    return {
+        type: CONST_PTR_SET_HOTTHOUGHT,
+        thoughtRecID
     }
 }
 

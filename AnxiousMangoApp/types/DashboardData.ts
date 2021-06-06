@@ -11,7 +11,8 @@ export type ThoughtRecord = {
     title: string,
     situationList: string[],
     moods: Mood[],
-    automaticThoughts: AutomaticThought[]
+    automaticThoughts: AutomaticThought[],
+    selectedPendingThoughtRecord?: number,
 }
 
 type Mood = {
@@ -21,10 +22,13 @@ type Mood = {
 
 type AutomaticThought = {
     description: string,
-    hotThought?: HotThought
+    id: string,
+    hotThought?: HotThought,
+    // isFocused?: boolean // this automatic thought is selected by user
 }
 
 export type HotThought = {
+    description: string,
     for: string[],
     against: string[],
     balancedThought: string[]
@@ -47,19 +51,24 @@ export const dashboardDemoData: DashboardData = {
                 {
                     description: "Things will never change.",
                     hotThought: {
+                        description: "Things will never change.",
                         for: ["my friends don't call me back", "I lost my job", "We will never go back to pre-COVID times"],
                         against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"],
                         balancedThought: ["There will be better days ahead", "Biden is now president", "there are more covid vaccines"]
-                    }
+                    },
+                    id: 'abc1',
                 },
                 {
                     description: "This is hopeless.",
+                    id: 'abc2'
                 },
                 {
                     description: "Life's not fair.",
+                    id: 'abc3'
                 },
                 {
                     description: "It didn't used to be like this.",
+                    id: 'abc4'
                 }
             ]
 
@@ -78,19 +87,24 @@ export const dashboardDemoData: DashboardData = {
                 {
                     description: "Things will never change.",
                     hotThought: {
+                        description: "Things will never change.",
                         for: ["my friends don't call me back", "I lost my job", "We will never go back to pre-COVID times"],
                         against: ["Pfizer and Moderna have covid vaccines", "Trump won't be president in 2021"],
                         balancedThought: ["There will be better days ahead", "Biden is now president", "there are more covid vaccines"]
-                    }
+                    },
+                    id: 'abc1'
                 },
                 {
                     description: "This is hopeless.",
+                    id: 'abc2'
                 },
                 {
                     description: "Life's not fair.",
+                    id: 'abc3'
                 },
                 {
                     description: "It didn't used to be like this.",
+                    id: 'abc4'
                 }
             ]
 

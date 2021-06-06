@@ -3,7 +3,7 @@ import {Button, StyleSheet} from 'react-native';
 
 import {View} from '../components/Themed';
 import Dashboard from "../components/Dashboard/Dashboard";
-import {DashboardData, dashboardDemoData} from "../types/DashboardData";
+import {DashboardData, dashboardDemoData, ThoughtRecord} from "../types/DashboardData";
 import MainTabNavButton from "../components/Dashboard/ThoughtRecords/MainTabNavButton";
 import ModifyThoughtRecordsScreen
   from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ModifyThoughtRecordsScreen";
@@ -70,6 +70,10 @@ export default function MainTab(this: any) {
   const currentThoughtRecordID = useSelector(
       (state: {thoughtRecordData: DashboardData}) => state.thoughtRecordData.selectedThoughtRecordID
   )
+
+  const pendingThoughtRecord = useSelector((state: {thoughtRecordData: {pendingThoughtRecord: ThoughtRecord}}) =>
+      state.thoughtRecordData.pendingThoughtRecord
+  );
 
   // get current mode using useSelector()
   const currentMode = useSelector(
@@ -236,6 +240,7 @@ export default function MainTab(this: any) {
                   />
                   <Button
                       onPress={() => dispatch(changeDashboardModeAction(MainTabModes.BalancedThought))}
+                      disabled={pendingThoughtRecord.selectedPendingThoughtRecord != -1}
                       title="Next"
                       color="#D39999"
                   />

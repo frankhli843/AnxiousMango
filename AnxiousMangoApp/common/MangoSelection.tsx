@@ -1,35 +1,46 @@
 import * as React from 'react';
 import {StyleSheet, View, Text} from "react-native";
 import {useState} from "react";
+import {useSelector} from "react-redux";
+import {ThoughtRecord} from "../types/DashboardData";
 
 
-const styles = StyleSheet.create({
+const styles = {
  selected: {color: 'green'},
  unselected: {color: 'black'},
  card: {border: '1px', borderColor:'gray'}
-})
+};
 
+// const pendingThoughtRecord = useSelector((state: {thoughtRecordData: {pendingThoughtRecord: ThoughtRecord}}) =>
+//     state.thoughtRecordData.pendingThoughtRecord
+// );
+
+
+type SelectionType = {
+    description: string,
+    id: string,
+}
 type MangoSelectionProps = {
     style: object,
-    selectionList: string[],
-    onSelection: (index: number) => {} // TODO: given the index of what was selected, do something with that index. so here set it as a hotThought
+    selectionList: SelectionType[],
+    onSelection: (id: string) => void
 }
 
 const MangoSelection = ({
     style, selectionList, onSelection
 }: MangoSelectionProps) => {
-    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const [selectedID, setSelectedID] = useState("");
     return (
         <View style={style}>
             {
-                selectionList.map((a, i) => (
+                selectionList.map(selection => (
                     <div style={styles.card}
                         onClick={() => {
-                        setSelectedIndex(i);
-                        onSelection(i);
-                    }}>
-                        <Text style={selectedIndex === i ? styles.selected: undefined}>
-                            {a}
+                            setSelectedID(selection.id);
+                            onSelection(selection.id);
+                        }}>
+                        <Text style={selectedID === selection.id ? styles.selected: undefined}>
+                            {selection.description}
                         </Text>
                     </div>
                 ))
