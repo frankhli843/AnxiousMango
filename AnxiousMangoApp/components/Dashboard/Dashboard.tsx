@@ -3,7 +3,6 @@ import {Image, StyleSheet, View} from "react-native";
 import {ThoughtRecord} from "../../types/DashboardData";
 import ThoughtRecordList from "./ThoughtRecords/ThoughtRecordList";
 import {Text} from "../Themed";
-import {AppLoading} from "expo";
 import {useFonts} from '@expo-google-fonts/rubik'
 // install SyncStorage
 // import SyncStorage from 'sync-storage'
@@ -24,9 +23,6 @@ export const Dashboard = ({ thoughtRecords, goToThoughtRecord }: DashboardProps)
         'Rubik_400Regular': require('../../assets/fonts/Rubik-VariableFont_wght.ttf')
     })
 
-    if (!fontsLoaded) {
-        return <AppLoading />
-    } else {
         return <>
             <View style={styles.getStartedContainer}>
                 <Image
@@ -38,7 +34,6 @@ export const Dashboard = ({ thoughtRecords, goToThoughtRecord }: DashboardProps)
                     thoughtRecords ={thoughtRecords}/>
             </View>
         </>
-    }
 
 }
 

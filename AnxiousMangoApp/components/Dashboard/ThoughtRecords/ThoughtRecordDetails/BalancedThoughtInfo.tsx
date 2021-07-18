@@ -5,7 +5,7 @@ import {Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
 import {ThoughtRecord} from "../../../../types/DashboardData";
 import {useSelector} from "react-redux";
 import {useFonts} from "@expo-google-fonts/rubik";
-import {AppLoading} from "expo";
+// @ts-ignore
 
 type modifyThoughtRecordScreenProps = {
     thoughtRecords: ThoughtRecord[],
@@ -20,10 +20,6 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
         (state: { thoughtRecordData: { thoughtRecords: ThoughtRecord[] } }) => {
             return state.thoughtRecordData.thoughtRecords[currentThoughtRecordID];
         })
-
-    if (!fontsLoaded) {
-        return <AppLoading/>
-    } else {
         return (
             <ScrollView style={styles.card}>
                 <View style={styles.container}/>
@@ -77,7 +73,6 @@ function BalancedThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreen
                 <View/>
             </ScrollView>
         )
-    }
 }
 
 const styles = StyleSheet.create({

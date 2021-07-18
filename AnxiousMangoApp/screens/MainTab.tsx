@@ -71,9 +71,13 @@ export default function MainTab(this: any) {
       (state: {thoughtRecordData: DashboardData}) => state.thoughtRecordData.selectedThoughtRecordID
   )
 
-  const pendingThoughtRecord = useSelector((state: {thoughtRecordData: {pendingThoughtRecord: ThoughtRecord}}) =>
-      state.thoughtRecordData.pendingThoughtRecord
-  );
+  const hotThoughtID = useSelector(
+      (state: {thoughtRecordData: {pendingThoughtRecord: ThoughtRecord}}) => state.thoughtRecordData.pendingThoughtRecord.selectedPendingThoughtRecord
+  )
+
+  // const pendingThoughtRecord = useSelector((state: {thoughtRecordData: {pendingThoughtRecord: ThoughtRecord}}) =>
+  //     state.thoughtRecordData.pendingThoughtRecord
+  // );
 
   // get current mode using useSelector()
   const currentMode = useSelector(
@@ -240,7 +244,7 @@ export default function MainTab(this: any) {
                   />
                   <Button
                       onPress={() => dispatch(changeDashboardModeAction(MainTabModes.BalancedThought))}
-                      disabled={pendingThoughtRecord.selectedPendingThoughtRecord != -1}
+                      disabled={!!hotThoughtID} // !! -> first ! converts it to boolean, second ! negates it
                       title="Next"
                       color="#D39999"
                   />

@@ -3,7 +3,6 @@ import {Cell, Section, TableView} from "react-native-tableview-simple";
 import * as React from "react";
 import {ThoughtRecord} from "../../../types/DashboardData";
 import {useFonts} from "@expo-google-fonts/rubik";
-import {AppLoading} from "expo";
 
 const tableViewStyles = {
     backgroundColor: '#D39999',
@@ -23,9 +22,6 @@ function ThoughtRecordList({thoughtRecords, goToThoughtRecord}: thoughtRecordPro
         'Rubik_400Regular': require('../../../assets/fonts/Rubik-VariableFont_wght.ttf')
     })
 
-    if (!fontsLoaded) {
-        return <AppLoading />
-    } else {
         return <>
             <ScrollView contentContainerStyle={tableViewStyles}>
                 <TableView>
@@ -51,7 +47,6 @@ function ThoughtRecordList({thoughtRecords, goToThoughtRecord}: thoughtRecordPro
                 </TableView>
             </ScrollView>
         </>
-    }
 }
 
 export default ThoughtRecordList;

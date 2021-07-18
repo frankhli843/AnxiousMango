@@ -11,7 +11,6 @@ import {
     removeThoughtRecordSituationAction
 } from "../../../../actions/thoughtRecordActions";
 import {useFonts} from "@expo-google-fonts/rubik";
-import {AppLoading} from "expo";
 import App from "../../../../App";
 import ReduxInput from "../../../../common/ReduxInput";
 
@@ -29,10 +28,6 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
             return state.thoughtRecordData.thoughtRecords[currentThoughtRecordID];
         });
     const dispatch = useDispatch();
-
-    if (!fontsLoaded) {
-        return <AppLoading/>
-    } else {
         return(
             <ScrollView style={style.scroll}>
             <View>
@@ -73,7 +68,6 @@ function HotThoughtInfo({currentThoughtRecordID}: modifyThoughtRecordScreenProps
 
             </ScrollView>
         )
-    }
 
 
 }

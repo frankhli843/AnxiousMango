@@ -5,7 +5,6 @@ import {ThoughtRecord} from "../../../../../types/DashboardData";
 import {useDispatch, useSelector} from "react-redux";
 import ReduxInput from "../../../../../common/ReduxInput";
 import {useFonts} from "@expo-google-fonts/rubik";
-import {AppLoading} from "expo";
 import {
     addAutoThoughtAction,
     addMoodAction,
@@ -34,9 +33,6 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
     })
     const dispatch = useDispatch();
 
-    if (!fontsLoaded) {
-        return <AppLoading/>
-    } else {
         return (
             <View style={styles.container}>
                 <Card>
@@ -149,7 +145,6 @@ function ThoughtRecordInfo({currentThoughtRecordID}: modifyThoughtRecordScreenPr
             </View>
 
         )
-    }
 }
 
 const styles = StyleSheet.create({

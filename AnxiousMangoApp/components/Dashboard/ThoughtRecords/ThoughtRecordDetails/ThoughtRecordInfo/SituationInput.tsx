@@ -3,6 +3,7 @@ import * as React from "react";
 import {TextInput, StyleSheet} from "react-native";
 import {useDispatch, useSelector} from "react-redux"
 import {DashboardData, ThoughtRecord} from "../../../../../types/DashboardData";
+// @ts-ignore
 import {changeThoughtRecordSituationAction, changeThoughtRecordTitleAction} from "../../../../../reducers";
 
 type modifyThoughtRecordScreenProps = {
