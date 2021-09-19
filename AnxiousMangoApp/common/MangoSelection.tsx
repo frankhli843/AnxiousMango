@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StyleSheet, View, Text} from "react-native";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {ThoughtRecord} from "../types/DashboardData";
 
@@ -23,13 +23,20 @@ type SelectionType = {
 type MangoSelectionProps = {
     style: object,
     selectionList: SelectionType[],
-    onSelection: (id: string) => void
+    onSelection: (id: string) => void,
+    defaultSelectedID?: string // index to be selected in the beginning by default
 }
 
 const MangoSelection = ({
-    style, selectionList, onSelection
+    style, selectionList, onSelection, defaultSelectedID
 }: MangoSelectionProps) => {
     const [selectedID, setSelectedID] = useState("");
+    // useEffect gets called whenever a specific parameter gets changed
+    useEffect(() => {
+        if (defaultSelectedID !== undefined && selectedID === '') { // do this only if default selection defined
+            setSelectedID(defaultSelectedID)
+        }
+    }, []) // this only runs when something in dependency array changes
     return (
         <View style={style}>
             {
@@ -39,9 +46,16 @@ const MangoSelection = ({
                             setSelectedID(selection.id);
                             onSelection(selection.id);
                         }}>
-                        <Text style={selectedID === selection.id ? styles.selected: undefined}>
-                            {selection.description}
-                        </Text>
+                        { selectedID === selection.id
+                            ? <Text style={styles.selected}>
+                                {`Selected: ${selection.description}`}
+                            </Text>
+                            : <Text>
+                                {selection.description}
+                            </Text>
+
+                        }
+
                     </div>
                 ))
             }

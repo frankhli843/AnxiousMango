@@ -26,7 +26,7 @@ function thoughtRecordData(state = {
             return {
                 ...state,
                 pendingThoughtRecord: {
-                    selectedPendingThoughtRecord: -1,
+                    selectedAutoThoughtID: "",
                     dateCreated: now.toString(),
                     dateModified: now.toString(),
                     title: now.toLocaleString('en-US'),
@@ -60,12 +60,12 @@ function thoughtRecordData(state = {
                     automaticThoughts: action.autoThoughts
                 }
             }
-        case "CONST_PTR_SET_HOTTHOUGHT":
+        case "CONST_PTR_SELECT_AUTOMATIC_THOUGHT":
             return {
                 ...state,
                 pendingThoughtRecord: {
                     ...state.pendingThoughtRecord,
-                    selectedPendingThoughtRecord: action.thoughtRecID
+                    selectedAutoThoughtID: action.automaticThoughtID
                 }
             }
 

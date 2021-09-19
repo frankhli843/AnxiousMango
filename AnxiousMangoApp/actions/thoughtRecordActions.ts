@@ -23,7 +23,7 @@ export const CONST_MAKE_PENDING_THOUGHT_RECORD = "CONST_MAKE_PENDING_THOUGHT_REC
 export const CONST_PTR_CHANGE_SITUATION = "CONST_PTR_CHANGE_SITUATION";
 export const CONST_PTR_CHANGE_MOOD = "CONST_PTR_CHANGE_MOOD";
 export const CONST_PTR_CHANGE_AUTOTHOUGHT = "CONST_PTR_CHANGE_AUTOTHOUGHT";
-export const CONST_PTR_SET_HOTTHOUGHT = "CONST_PTR_SET_HOTTHOUGHT";
+export const CONST_PTR_SELECT_AUTOMATIC_THOUGHT = "CONST_PTR_SELECT_AUTOMATIC_THOUGHT";
 
 export enum MainTabModes {
     Dashboard ="CONST_DASHBOARD",
@@ -66,10 +66,10 @@ export function ptrChangeAutoThought(autoThoughts: string[]) {
     }
 }
 
-export function ptrSetHotThought(thoughtRecID: string) {
+export function ptrSelectAutomaticThought(automaticThoughtID: string) {
     return {
-        type: CONST_PTR_SET_HOTTHOUGHT,
-        thoughtRecID
+        type: CONST_PTR_SELECT_AUTOMATIC_THOUGHT,
+        automaticThoughtID
     }
 }
 

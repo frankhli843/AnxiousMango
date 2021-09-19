@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ThoughtRecord} from "../../../types/DashboardData";
 import MangoSelection from "../../../common/MangoSelection";
 import {useState} from "react";
-import {ptrSetHotThought} from "../../../actions/thoughtRecordActions";
+import {ptrSelectAutomaticThought} from "../../../actions/thoughtRecordActions";
 
 const styles = StyleSheet.create({
     hotThoughtView: {
@@ -59,10 +59,14 @@ const HotThought = () => {
                             setSelectedThoughtID(selected.id);
                             // TODO save the selected thought in redux
                             // TODO enable the next button once the redux value is not null
-                            dispatch(ptrSetHotThought(selected.id));
+                            dispatch(ptrSelectAutomaticThought(selected.id));
                         }
 
-                    }}/>
+                    }}
+                    defaultSelectedID={thoughtDescriptions && thoughtDescriptions.length > 0
+                        ? thoughtDescriptions[0].id
+                        : undefined}
+                />
                 <Text>
                 {
                     selectedThoughtID === "" ? "select your thought": "thought selected"

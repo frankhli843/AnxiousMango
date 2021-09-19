@@ -12,7 +12,7 @@ export type ThoughtRecord = {
     situationList: string[],
     moods: Mood[],
     automaticThoughts: AutomaticThought[],
-    selectedPendingThoughtRecord?: number,
+    selectedAutoThoughtID?: string,
 }
 
 type Mood = {
@@ -20,7 +20,7 @@ type Mood = {
     percentage: number // this is 0 to 100
 }
 
-type AutomaticThought = {
+export type AutomaticThought = {
     description: string,
     id: string,
     hotThought?: HotThought,
