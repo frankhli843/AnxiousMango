@@ -57,8 +57,6 @@ const HotThought = () => {
                         const selected = selectedList.length > 0 ? selectedList[0]: null;
                         if (selected){
                             setSelectedThoughtID(selected.id);
-                            // TODO save the selected thought in redux
-                            // TODO enable the next button once the redux value is not null
                             dispatch(ptrSelectAutomaticThought(selected.id));
                         }
 
