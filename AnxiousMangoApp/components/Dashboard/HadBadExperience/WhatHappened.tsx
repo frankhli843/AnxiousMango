@@ -3,6 +3,7 @@ import {Image, StyleSheet, TextInput, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {DashboardData} from "../../../types/DashboardData";
 import {makePendingThoughtRecord, ptrChangeSituation} from "../../../actions/thoughtRecordActions";
+import {useState} from "react";
 
 const styles = StyleSheet.create({
     whatHappenedView: { display: 'flex', alignItems: 'center'},
@@ -16,9 +17,12 @@ const WhatHappened = () => {
     const dispatch = useDispatch();
     // check if pending is empty, if it is make a new thought record
     const pendingThoughtRecord = useSelector((state:DashboardData ) => state.pendingThoughtRecord);
-    if (!pendingThoughtRecord || Object.keys(pendingThoughtRecord).length === 0){
-        dispatch(makePendingThoughtRecord());
-    }
+    useState(() => {
+        if (!pendingThoughtRecord || Object.keys(pendingThoughtRecord).length === 0){
+            dispatch(makePendingThoughtRecord());
+        }
+    })
+
     return(
         <View style={styles.whatHappenedView}>
             <Image

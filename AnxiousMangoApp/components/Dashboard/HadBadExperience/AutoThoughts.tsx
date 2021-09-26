@@ -43,7 +43,6 @@ const AutoThoughts = () => {
                     onChangeText={(autoThought) => {
                         const thoughtArray = autoThought.replace("\n\n", "\n").split("\n") as any;
                         dispatch(ptrChangeAutoThought(thoughtArray));
-
                     }}
                 />
             </View>

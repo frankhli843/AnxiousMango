@@ -8,6 +8,7 @@ import MainTabNavButton from "../components/Dashboard/ThoughtRecords/MainTabNavB
 import ModifyThoughtRecordsScreen
   from "../components/Dashboard/ThoughtRecords/ThoughtRecordDetails/ModifyThoughtRecordsScreen";
 import {useDispatch, useSelector} from 'react-redux'
+import {id} from "../utilities/id";
 
 import commonStyles from "../common/CommonStyles";
 import {changeDashboardModeAction, MainTabModes, setCurrentThoughtRecordID} from "../actions/thoughtRecordActions";
@@ -69,6 +70,10 @@ export default function MainTab(this: any) {
   //         (id) => {dispatch(setCurrentThoughtRecordID(id)}
   const currentThoughtRecordID = useSelector(
       (state: {thoughtRecordData: DashboardData}) => state.thoughtRecordData.selectedThoughtRecordID
+  )
+
+  const autoThoughts = useSelector(
+      (state: {thoughtRecordData: { pendingThoughtRecord: ThoughtRecord }}) => state.thoughtRecordData.pendingThoughtRecord.automaticThoughts
   )
 
   const automaticThoughtID = useSelector(
@@ -225,7 +230,7 @@ export default function MainTab(this: any) {
                       color="#D39999"
                   />
                   <Button
-                      onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThought))}
+                      onPress={() => autoThoughts.length > 0 ? dispatch(changeDashboardModeAction(MainTabModes.HotThought)) : alert("Must enter thoughts to continue")}
                       title="Next"
                       color="#D39999"
                   />
