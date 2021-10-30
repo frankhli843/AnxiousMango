@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     backgroundColor: "#E5E5E5"
   },
+  btdButtonStyle: {
+    backgroundColor: "#E5E5E5",
+    paddingTop: 24,
+  }
 });
 
 export default function MainTab(this: any) {
@@ -199,6 +203,15 @@ export default function MainTab(this: any) {
                       color="#D39999"
                   />
                 </View>
+                <View style={styles.btdButtonStyle}>
+                  <Button
+                      title={"Back to dashboard"}
+                      onPress={() => {
+                        dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                      }}
+                      color="#D39999"
+                  />
+                </View>
               </>
         }
         {
@@ -217,6 +230,15 @@ export default function MainTab(this: any) {
                       color="#D39999"
                   />
                 </View>
+                <View style={styles.btdButtonStyle}>
+                  <Button
+                      title={"Back to dashboard"}
+                      onPress={() => {
+                        dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                      }}
+                      color="#D39999"
+                  />
+                </View>
               </>
         }
         {
@@ -232,6 +254,15 @@ export default function MainTab(this: any) {
                   <Button
                       onPress={() => autoThoughts.length > 0 ? dispatch(changeDashboardModeAction(MainTabModes.HotThought)) : alert("Must enter thoughts to continue")}
                       title="Next"
+                      color="#D39999"
+                  />
+                </View>
+                <View style={styles.btdButtonStyle}>
+                  <Button
+                      title={"Back to dashboard"}
+                      onPress={() => {
+                        dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                      }}
                       color="#D39999"
                   />
                 </View>
@@ -254,6 +285,15 @@ export default function MainTab(this: any) {
                       color="#D39999"
                   />
                 </View>
+                <View style={styles.btdButtonStyle}>
+                  <Button
+                      title={"Back to dashboard"}
+                      onPress={() => {
+                        dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                      }}
+                      color="#D39999"
+                  />
+                </View>
               </>
         }
         {
@@ -264,6 +304,15 @@ export default function MainTab(this: any) {
                   <Button
                       onPress={() => dispatch(changeDashboardModeAction(MainTabModes.HotThought))}
                       title="Back"
+                      color="#D39999"
+                  />
+                </View>
+                <View style={styles.btdButtonStyle}>
+                  <Button
+                      title={"Back to dashboard"}
+                      onPress={() => {
+                        dispatch(changeDashboardModeAction(MainTabModes.Dashboard))
+                      }}
                       color="#D39999"
                   />
                 </View>
