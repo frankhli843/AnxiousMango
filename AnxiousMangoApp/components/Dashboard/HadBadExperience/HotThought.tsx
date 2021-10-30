@@ -58,6 +58,8 @@ const HotThought = () => {
                         if (selected){
                             setSelectedThoughtID(selected.id);
                             dispatch(ptrSelectAutomaticThought(selected.id));
+                        } else {
+                            dispatch(ptrSelectAutomaticThought(thoughtDescriptions[0].id))
                         }
 
                     }}
@@ -65,11 +67,7 @@ const HotThought = () => {
                         ? thoughtDescriptions[0].id
                         : undefined}
                 />
-                <Text>
-                {
-                    selectedThoughtID === "" ? "select your thought": "thought selected"
-                }
-                </Text>
+
             </View>
         </ScrollView>
     );

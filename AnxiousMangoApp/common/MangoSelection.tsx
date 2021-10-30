@@ -35,6 +35,7 @@ const MangoSelection = ({
     useEffect(() => {
         if (defaultSelectedID !== undefined && selectedID === '') { // do this only if default selection defined
             setSelectedID(defaultSelectedID)
+            onSelection(defaultSelectedID)
         }
     }, []) // this only runs when something in dependency array changes
     return (
